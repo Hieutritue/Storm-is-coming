@@ -19,13 +19,15 @@ public class BaseUnit : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private float _range;
     [SerializeField] private float _attackCooldown;
+    [SerializeField] private bool _doesAoe;
+    [SerializeField, ShowIf("_doesAoe")] private Animator _explosion;
     [SerializeField] private AnimController _animController;
     [SerializeField] private Animator _dead;
 
     protected BaseUnit _target;
 
     private Vector2 _initialPos;
-    private float _timer = 10f;
+    private float _timer = 0;
     private SpriteRenderer _spriteRenderer;
 
     public Vector2 InitialPos
@@ -84,9 +86,8 @@ public class BaseUnit : MonoBehaviour
 
         if (!_target)
         {
-            Debug.Log(transform.position + "\n" + _initialPos);
-            if (transform.position.x < Mathf.Ceil(_initialPos.x) 
-                && transform.position.y < Mathf.Ceil(_initialPos.y)
+            if (transform.position.x < Mathf.Ceil(_initialPos.x) + 0.1f
+                && transform.position.y < Mathf.Ceil(_initialPos.y) + 0.1f
                 && transform.position.x >= Mathf.Floor(_initialPos.x)
                 && transform.position.y >= Mathf.Floor(_initialPos.y))
             {
@@ -108,6 +109,14 @@ public class BaseUnit : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    private void Explode()
+    {
+        var ex = Instantiate(_explosion, RealPosition);
+        ex.transform.SetParent(transform.parent);
+        UniTask.Delay(900).ContinueWith(() => Destroy(ex.gameObject));
+        Destroy(this.gameObject);
+    }
+
     [Button]
     public virtual void Attack()
     {
@@ -117,6 +126,23 @@ public class BaseUnit : MonoBehaviour
 
     public void DealDamage()
     {
+        if (_doesAoe)
+        {
+            var targetUnits =
+                IsAlly
+                    ? GameManager.Instance.UnitManager.AllEnemies
+                    : GameManager.Instance.UnitManager.AllAllies;
+            targetUnits
+                .Where(t => DistanceTo(t.transform.position) < _range)
+                .ToList()
+                .ForEach(t =>
+                {
+                    t.TakeDamage(_damage);
+                });
+            Explode();
+            return;
+        }
+        
         _target?.TakeDamage(_damage);
     }
 
