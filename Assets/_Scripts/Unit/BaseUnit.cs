@@ -83,7 +83,6 @@ public class BaseUnit : MonoBehaviour
             if(transform.position.Equals(_initialPos))
                 return;
             
-            Debug.Log(_initialPos);
             MoveToTarget(_initialPos);
             return;
         }
