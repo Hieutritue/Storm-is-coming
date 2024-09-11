@@ -12,7 +12,6 @@ public class BaseUnit : MonoBehaviour
 {
     public bool IsAlly;
 
-    [FormerlySerializedAs("_realPosition")]
     public Transform RealPosition;
 
     [SerializeField] private int _health;
@@ -40,10 +39,12 @@ public class BaseUnit : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private float _distanceToTarget =>
-        _target != null ? Vector2.Distance(RealPosition.position, _target.RealPosition.position) : 100f;
+    private float DistanceToTarget =>
+        _target != null ? Vector2.Distance(transform.position, _target.transform.position) : 100f;
 
-    private bool _targetInRange => _distanceToTarget <= _range;
+    private bool TargetInRange => DistanceToTarget <= _range;
+
+    private float DistanceTo(Vector2 pos) => Vector2.Distance(transform.position, pos); 
 
     public int Health
     {
@@ -60,16 +61,16 @@ public class BaseUnit : MonoBehaviour
 
     private void Update()
     {
-        if(_target) CheckDirection(_target.RealPosition.position);
-        
-        if (_spriteRenderer != null)
+        if (_target) CheckDirection(_target.transform.position);
+
+        if (_spriteRenderer)
         {
             // Higher Y value means lower sorting order
             _spriteRenderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100 + 1000);
         }
-        
+
         FindClosestTarget();
-        if (_targetInRange)
+        if (TargetInRange)
         {
             _timer += Time.deltaTime;
             if (_timer >= _attackCooldown)
@@ -83,14 +84,19 @@ public class BaseUnit : MonoBehaviour
 
         if (!_target)
         {
-            if(transform.position.Equals(_initialPos))
+            Debug.Log(transform.position + "\n" + _initialPos);
+            if (transform.position.x < Mathf.Ceil(_initialPos.x) 
+                && transform.position.y < Mathf.Ceil(_initialPos.y)
+                && transform.position.x >= Mathf.Floor(_initialPos.x)
+                && transform.position.y >= Mathf.Floor(_initialPos.y))
+            {
                 return;
-            
+            }
+
             MoveToTarget(_initialPos);
             return;
         }
-
-        MoveToTarget(_target.RealPosition.position);
+        MoveToTarget(_target.transform.position);
     }
 
 
@@ -130,7 +136,7 @@ public class BaseUnit : MonoBehaviour
                 : GameManager.Instance.UnitManager.AllAllies;
 
         _target = targetUnits
-            .OrderBy(u => _distanceToTarget)
+            .OrderBy(u => DistanceTo(u.transform.position))
             .FirstOrDefault();
     }
 
@@ -144,7 +150,7 @@ public class BaseUnit : MonoBehaviour
         GameManager.Instance.UnitManager.AllUnits.Remove(this);
     }
 
-    void CheckDirection(Vector2 target)
+    private void CheckDirection(Vector2 target)
     {
         if (target.x > transform.position.x)
             transform.localScale = new Vector3(1, 1, 1);
@@ -153,7 +159,7 @@ public class BaseUnit : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
     }
-    
+
     private void MoveToTarget(Vector2 target)
     {
         CheckDirection(target);
