@@ -2,18 +2,42 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BaseUnit : MonoBehaviour
 {
     public bool IsAlly;
 
+    [FormerlySerializedAs("_realPosition")]
+    public Transform RealPosition;
+
     [SerializeField] private int _health;
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
     [SerializeField] private float _range;
+    [SerializeField] private float _attackCooldown;
+    [SerializeField] private AnimController _animController;
 
-    private BaseUnit _target;
+    protected BaseUnit _target;
+
+    private Vector2 _initialPos;
+    private float _timer = 10f;
+    private SpriteRenderer _spriteRenderer;
+
+    public Vector2 InitialPos
+    {
+        set => _initialPos = value;
+    }
+
+    private void Awake()
+    {
+        _initialPos = transform.position;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private float _distanceToTarget =>
         _target != null ? Vector2.Distance(transform.position, _target.transform.position) : 100f;
@@ -35,14 +59,36 @@ public class BaseUnit : MonoBehaviour
 
     private void Update()
     {
+        if (_spriteRenderer != null)
+        {
+            // Higher Y value means lower sorting order
+            _spriteRenderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100 + 1000);
+        }
+        
+        FindClosestTarget();
         if (_targetInRange)
         {
-            Attack();
+            _timer += Time.deltaTime;
+            if (_timer >= _attackCooldown)
+            {
+                Attack();
+                _timer = 0;
+            }
+
             return;
         }
 
-        FindClosestTarget();
-        MoveToTarget();
+        if (!_target)
+        {
+            if(transform.position.Equals(_initialPos))
+                return;
+            
+            Debug.Log(_initialPos);
+            MoveToTarget(_initialPos);
+            return;
+        }
+
+        MoveToTarget(_target.transform.position);
     }
 
 
@@ -51,13 +97,22 @@ public class BaseUnit : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    [Button]
     public virtual void Attack()
     {
-        _target.TakeDamage(_damage);
+        _animController.PlayAttack();
+    }
+
+    public void DealDamage()
+    {
+        _target?.TakeDamage(_damage);
     }
 
     public void TakeDamage(int damage)
     {
+        _spriteRenderer.DOColor(Color.red, 0.05f).OnComplete(
+            () => { _spriteRenderer.DOColor(Color.white, 0.05f); }
+        );
         Health -= damage;
     }
 
@@ -83,13 +138,20 @@ public class BaseUnit : MonoBehaviour
         GameManager.Instance.UnitManager.AllUnits.Remove(this);
     }
 
-    private void MoveToTarget()
+    private void MoveToTarget(Vector2 target)
     {
-        if (_target != null)
-            transform.position = Vector2.MoveTowards(
-                    transform.position, 
-                    _target.transform.position, 
-                    _speed * Time.deltaTime
-                    );
+        if (target.x > transform.position.x)
+            transform.localScale = new Vector3(1, 1, 1);
+        else
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        _animController.PlayMove();
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            target,
+            _speed * Time.deltaTime
+        );
     }
 }
