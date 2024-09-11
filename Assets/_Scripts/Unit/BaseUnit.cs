@@ -21,6 +21,7 @@ public class BaseUnit : MonoBehaviour
     [SerializeField] private float _range;
     [SerializeField] private float _attackCooldown;
     [SerializeField] private AnimController _animController;
+    [SerializeField] private Animator _dead;
 
     protected BaseUnit _target;
 
@@ -40,7 +41,7 @@ public class BaseUnit : MonoBehaviour
     }
 
     private float _distanceToTarget =>
-        _target != null ? Vector2.Distance(transform.position, _target.transform.position) : 100f;
+        _target != null ? Vector2.Distance(RealPosition.position, _target.RealPosition.position) : 100f;
 
     private bool _targetInRange => _distanceToTarget <= _range;
 
@@ -59,6 +60,8 @@ public class BaseUnit : MonoBehaviour
 
     private void Update()
     {
+        if(_target) CheckDirection(_target.RealPosition.position);
+        
         if (_spriteRenderer != null)
         {
             // Higher Y value means lower sorting order
@@ -87,12 +90,15 @@ public class BaseUnit : MonoBehaviour
             return;
         }
 
-        MoveToTarget(_target.transform.position);
+        MoveToTarget(_target.RealPosition.position);
     }
 
 
     private void Die()
     {
+        var dead = Instantiate(_dead, RealPosition);
+        dead.transform.SetParent(transform.parent);
+        UniTask.Delay(1800).ContinueWith(() => Destroy(dead.gameObject));
         Destroy(this.gameObject);
     }
 
@@ -100,6 +106,7 @@ public class BaseUnit : MonoBehaviour
     public virtual void Attack()
     {
         _animController.PlayAttack();
+        UniTask.Delay(400).ContinueWith(DealDamage);
     }
 
     public void DealDamage()
@@ -137,7 +144,7 @@ public class BaseUnit : MonoBehaviour
         GameManager.Instance.UnitManager.AllUnits.Remove(this);
     }
 
-    private void MoveToTarget(Vector2 target)
+    void CheckDirection(Vector2 target)
     {
         if (target.x > transform.position.x)
             transform.localScale = new Vector3(1, 1, 1);
@@ -145,7 +152,11 @@ public class BaseUnit : MonoBehaviour
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
-
+    }
+    
+    private void MoveToTarget(Vector2 target)
+    {
+        CheckDirection(target);
         _animController.PlayMove();
         transform.position = Vector2.MoveTowards(
             transform.position,

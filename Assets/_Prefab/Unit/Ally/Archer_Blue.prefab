@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3215531213615242189}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.611, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -236,6 +236,7 @@ MonoBehaviour:
   _range: 3
   _attackCooldown: 1.5
   _animController: {fileID: 6444108082054328050}
+  _dead: {fileID: 1866738995743552115, guid: 8af6a010d8968af4989283cf0b5bf7a2, type: 3}
 --- !u!95 &8887774936508174850 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1160356261127867848, guid: 20bc881a66d2e0a4c9a34c0994ecf839, type: 3}

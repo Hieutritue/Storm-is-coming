@@ -7,13 +7,18 @@ using UnityEngine;
 
 public class EnemyWaveSpawner : MonoBehaviour
 {
-    [SerializeField] private List<EnemyWave> _enemyWaves;
+    [SerializeField] private EnemyWave _enemyWave;
 
     [Button]
-    public void SpawnWave()
+    public void TestSpawnWave()
     {
-        if(!_enemyWaves.Any()) return;
-        var _spawnedWave = Instantiate(_enemyWaves[0], transform);
-        _enemyWaves.RemoveAt(0);
+        if(!_enemyWave) return;
+        var _spawnedWave = Instantiate(_enemyWave, transform);
+    }
+
+    public void SpawnWave(EnemyWave enemyWave)
+    {
+        if(!enemyWave) return;
+        Instantiate(enemyWave, transform);
     }
 }

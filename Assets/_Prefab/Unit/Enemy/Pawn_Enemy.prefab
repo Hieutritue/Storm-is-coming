@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 328667223458575584}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.672, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -118,7 +118,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2253911629886400664, guid: 02707c1bb9632bb4ba5fffec7fe64c9b, type: 3}
       propertyPath: m_Name
-      value: Pawn_Blue
+      value: Pawn_Enemy
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 02707c1bb9632bb4ba5fffec7fe64c9b, type: 3}
       propertyPath: m_Layer
@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 1160356261127867848, guid: 02707c1bb9632bb4ba5fffec7fe64c9b, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 6667558d48665de4dbfbe49b59294469, type: 2}
+      objectReference: {fileID: 9100000, guid: c1f37dcaa0e5e5c47b8fa8986bb2e208, type: 2}
     - target: {fileID: 7878350319992209165, guid: 02707c1bb9632bb4ba5fffec7fe64c9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae6289ef06ecae4da04027ed52aed25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsAlly: 1
+  IsAlly: 0
   RealPosition: {fileID: 3484210832893536400}
   _health: 100
   _speed: 1
@@ -236,6 +236,7 @@ MonoBehaviour:
   _range: 1
   _attackCooldown: 3
   _animController: {fileID: 3489464343802074096}
+  _dead: {fileID: 1866738995743552115, guid: 8af6a010d8968af4989283cf0b5bf7a2, type: 3}
 --- !u!95 &5474180173253315708 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1160356261127867848, guid: 02707c1bb9632bb4ba5fffec7fe64c9b, type: 3}

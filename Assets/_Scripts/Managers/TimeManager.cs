@@ -14,6 +14,8 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private float _secondsPerGameDay;
     [SerializeField] private List<EventOfWeek> _eventWeeks;
 
+    [SerializeField] private EnemyWaveSpawner _enemyWaveSpawner;
+
     private float _timer;
 
     private void Start()
@@ -23,10 +25,12 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
+        if(!_eventWeeks.Any()) return; //TODO: win
+        
         if (CurrentWeek == _eventWeeks[0].Week)
         {
             _eventWeeks[0].CallStorm();
-            Instantiate(_eventWeeks[0].EnemyWave,GameManager.Instance.UnitManager.transform);
+            _enemyWaveSpawner.SpawnWave(_eventWeeks[0].EnemyWave);
             
             _eventWeeks.RemoveAt(0);
         }
@@ -52,10 +56,10 @@ public class EventOfWeek
 {
     public int Week;
     public string Storm;
-    public GameObject EnemyWave;
+    public EnemyWave EnemyWave;
 
     public void CallStorm()
     {
-        throw new NotImplementedException();
+        // throw new NotImplementedException();
     }
 }
