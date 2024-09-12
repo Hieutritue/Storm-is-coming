@@ -18,7 +18,7 @@ public class AllySpawner : MonoBehaviour
     public void TestSpawn()
     {
         Random random = new Random();
-        var xrNumber = random.NextDouble() * _spawnOffset;
+        var xrNumber = random.NextDouble() * _spawnOffset/2 + .5f;
         var yrNumber = random.NextDouble() * _spawnOffset;
         var spawnedUnit = Instantiate(_units[(int)TestAllyType], transform);
 

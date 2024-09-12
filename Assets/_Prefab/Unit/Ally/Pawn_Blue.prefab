@@ -117,6 +117,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 6667558d48665de4dbfbe49b59294469, type: 2}
+    - target: {fileID: 3626916397498700004, guid: 02707c1bb9632bb4ba5fffec7fe64c9b, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 02707c1bb9632bb4ba5fffec7fe64c9b, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1107124675
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 02707c1bb9632bb4ba5fffec7fe64c9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -223,6 +231,8 @@ MonoBehaviour:
   _damage: 15
   _range: 0.6
   _attackCooldown: 3
+  _doesAoe: 0
+  _explosion: {fileID: 0}
   _animController: {fileID: 3489464343802074096}
   _dead: {fileID: 1866738995743552115, guid: 8af6a010d8968af4989283cf0b5bf7a2, type: 3}
 --- !u!50 &-535269817596879684

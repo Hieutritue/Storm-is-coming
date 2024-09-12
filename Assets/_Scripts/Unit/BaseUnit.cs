@@ -23,6 +23,7 @@ public class BaseUnit : MonoBehaviour
     [SerializeField, ShowIf("_doesAoe")] private Animator _explosion;
     [SerializeField] private AnimController _animController;
     [SerializeField] private Animator _dead;
+    [SerializeField] private bool _isCastle;
 
     protected BaseUnit _target;
 
@@ -39,6 +40,7 @@ public class BaseUnit : MonoBehaviour
     {
         _initialPos = transform.position;
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        if (_isCastle) _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private float DistanceToTarget =>
@@ -63,6 +65,8 @@ public class BaseUnit : MonoBehaviour
 
     private void Update()
     {
+        if(_isCastle) return;
+        
         if (_target) CheckDirection(_target.transform.position);
 
         if (_spriteRenderer)

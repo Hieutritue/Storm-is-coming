@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8938618072694047213
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad93a5a8e628114d92552a62381b43a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &-5238018818638872143
 AnimatorState:
   serializedVersion: 6
@@ -13,7 +25,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 263090008458259040}
   m_StateMachineBehaviours:
-  - {fileID: -6093318395734138055, guid: 79576b0d04344ab4aa4f69c154706d91, type: 2}
+  - {fileID: -8938618072694047213}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
