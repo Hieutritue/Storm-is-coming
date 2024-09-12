@@ -23,6 +23,7 @@ public class BaseUnit : MonoBehaviour
     [SerializeField, ShowIf("_doesAoe")] private Animator _explosion;
     [SerializeField] private AnimController _animController;
     [SerializeField] private Animator _dead;
+    [SerializeField] private bool _isCastle;
 
     protected BaseUnit _target;
 
@@ -39,12 +40,13 @@ public class BaseUnit : MonoBehaviour
     {
         _initialPos = transform.position;
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        if (_isCastle) _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private float DistanceToTarget =>
         _target != null ? Vector2.Distance(transform.position, _target.transform.position) : 100f;
 
-    private bool TargetInRange => DistanceToTarget <= _range;
+    private bool TargetInRange => _doesAoe ? DistanceToTarget <= 0.7f : DistanceToTarget <= _range;
 
     private float DistanceTo(Vector2 pos) => Vector2.Distance(transform.position, pos); 
 
@@ -63,6 +65,8 @@ public class BaseUnit : MonoBehaviour
 
     private void Update()
     {
+        if(_isCastle) return;
+        
         if (_target) CheckDirection(_target.transform.position);
 
         if (_spriteRenderer)
@@ -103,6 +107,7 @@ public class BaseUnit : MonoBehaviour
 
     private void Die()
     {
+        if (_doesAoe) RealPosition.position += new Vector3(0, 2, 0);
         var dead = Instantiate(_dead, RealPosition);
         dead.transform.SetParent(transform.parent);
         UniTask.Delay(1800).ContinueWith(() => Destroy(dead.gameObject));

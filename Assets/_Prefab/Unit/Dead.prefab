@@ -16,6 +16,18 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 8ea0eed9a01270442b363ede1e79248c, type: 2}
+    - target: {fileID: 3626916397498700004, guid: 9554c69bbae6af046b3cdb0100be45b2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 9554c69bbae6af046b3cdb0100be45b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 9554c69bbae6af046b3cdb0100be45b2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1107124675
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 9554c69bbae6af046b3cdb0100be45b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -47,6 +47,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 8c85ab3fd1f4e4d408710e3dccff3da0, type: 2}
+    - target: {fileID: 3626916397498700004, guid: 6deffc73ee487d74a8478219ae8ba3dc, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 6deffc73ee487d74a8478219ae8ba3dc, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1107124675
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 6deffc73ee487d74a8478219ae8ba3dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.1
@@ -134,7 +142,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -169,8 +177,10 @@ MonoBehaviour:
   _range: 0.8
   _attackCooldown: 2
   _doesAoe: 0
+  _explosion: {fileID: 0}
   _animController: {fileID: 2433149563754859765}
   _dead: {fileID: 1866738995743552115, guid: 8af6a010d8968af4989283cf0b5bf7a2, type: 3}
+  _isCastle: 0
 --- !u!114 &2433149563754859765
 MonoBehaviour:
   m_ObjectHideFlags: 0
