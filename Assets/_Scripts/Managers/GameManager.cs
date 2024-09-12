@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public UnitManager UnitManager;
+    [SerializeField] private Texture2D _cursorTexture;
     
     public static GameManager Instance;
     
@@ -11,5 +12,7 @@ public class GameManager : MonoBehaviour
     {
         if(Instance != null) Destroy(Instance);
         Instance = this;
+        
+        Cursor.SetCursor(_cursorTexture,Vector2.zero, CursorMode.Auto);
     }
 }

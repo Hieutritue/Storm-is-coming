@@ -46,7 +46,7 @@ public class BaseUnit : MonoBehaviour
     private float DistanceToTarget =>
         _target != null ? Vector2.Distance(transform.position, _target.transform.position) : 100f;
 
-    private bool TargetInRange => DistanceToTarget <= _range;
+    private bool TargetInRange => _doesAoe ? DistanceToTarget <= 0.7f : DistanceToTarget <= _range;
 
     private float DistanceTo(Vector2 pos) => Vector2.Distance(transform.position, pos); 
 
@@ -107,6 +107,7 @@ public class BaseUnit : MonoBehaviour
 
     private void Die()
     {
+        if (_doesAoe) RealPosition.position += new Vector3(0, 2, 0);
         var dead = Instantiate(_dead, RealPosition);
         dead.transform.SetParent(transform.parent);
         UniTask.Delay(1800).ContinueWith(() => Destroy(dead.gameObject));
