@@ -8,6 +8,12 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
     public GameObject tilePrefab;
     public Transform tileParent;
     private GameObject spawnedTile;
+    private TileRequirement tileRequirement;
+    private TileType tileType;
+
+    private void Start(){
+        tilePrefab = gameManager.tileConfig.basicPrefab;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -47,6 +53,23 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
             gameManager.currentHoldingTile = null;
             spawnedTile = null;
             gameManager.CheckAllTile();
+        }
+    }
+
+    public void CheckForresourceAvailability()
+    {
+        var rm = GameManager.Instance.ResourceManager;
+
+        if (rm.CheckEnoughResources(tileRequirement))
+        {
+            rm.Wood -= tileRequirement.wood;
+            rm.Meat -= tileRequirement.meat;
+            rm.Iron -= tileRequirement.iron;
+            rm.Gold -= tileRequirement.gold;
+        }
+        else
+        {
+            Destroy(spawnedTile);
         }
     }
 }

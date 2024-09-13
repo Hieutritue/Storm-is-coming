@@ -9,19 +9,20 @@ public class GeneratorTile : Tile
 {
     public void Work() 
     {
+        var rm = GameManager.Instance.ResourceManager;
         switch (tileType)
         {
             case TileType.Lumberjack:
-                resourceManager.Wood += output;
+                rm.Wood += output;
                 break;
             case TileType.SheepFarm:
-                resourceManager.Meat += output;
+                rm.Meat += output;
                 break;
             case TileType.Forger:
-                resourceManager.Iron += output;
+                rm.Iron += output;
                 break;
             case TileType.Smelter:
-                resourceManager.Gold += output;
+                rm.Gold += output;
                 break;
         }
     }
