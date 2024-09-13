@@ -17,6 +17,8 @@ public class GameTileManager : BaselineManager
     public Transform tileParent;
 
     public GameObject currentHoldingTile;
+
+    public TileConfig tileConfig;
     public void Start(){
         gameManager = this;
 
