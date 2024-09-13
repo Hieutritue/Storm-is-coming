@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class Tile : BaselineManager
 {
@@ -10,6 +11,10 @@ public class Tile : BaselineManager
     [HideInInspector] public Transform parentAfterDrag;
     public bool isTemporary = false;
     public List<Tile> surroundingHouses = new();
+    public int level;
+    public TileType tileType;
+    public int output;
+    public WorkRequirement workRequirement;
 
     public void SetRaycast()
     {
@@ -54,4 +59,31 @@ public class Tile : BaselineManager
             }
         }
     }
+
+    public void Upgrade()
+    {
+        // Check if the tile can be upgraded
+        if (level < gameManager.tileConfig.tileData[tileType].maxLevel)
+        {
+            // Increase the level of the tile
+            level++;
+
+            // Update the tile's image
+            image.sprite = gameManager.tileConfig.tileData[tileType].sprites[level];
+
+            // Update the tile's output
+            output = gameManager.tileConfig.tileData[tileType].output[level];
+        }
+    }
+}
+
+[Serializable]
+public enum TileType {
+    Lumberjack,
+    SheepFarm,
+    Forger,
+    Smelter,
+    House,
+    Barrack,
+    WeatherMachine
 }
