@@ -107,6 +107,8 @@ public class BaseUnit : MonoBehaviour
 
     private void Die()
     {
+        GameManager.Instance.AudioManager.PlayClip(ClipName.UnitDie);
+        
         if (_doesAoe) RealPosition.position += new Vector3(0, 2, 0);
         var dead = Instantiate(_dead, RealPosition);
         dead.transform.SetParent(transform.parent);
@@ -116,6 +118,8 @@ public class BaseUnit : MonoBehaviour
 
     private void Explode()
     {
+        GameManager.Instance.AudioManager.PlayClip(ClipName.Explosion);
+        
         var ex = Instantiate(_explosion, RealPosition);
         ex.transform.SetParent(transform.parent);
         UniTask.Delay(900).ContinueWith(() => Destroy(ex.gameObject));
@@ -132,6 +136,8 @@ public class BaseUnit : MonoBehaviour
     public void DealDamage()
     {
         if(!TargetInRange) return;
+        
+        GameManager.Instance.AudioManager.PlayClip(ClipName.UnitHit);
         
         if (_doesAoe)
         {

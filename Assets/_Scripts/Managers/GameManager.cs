@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public UnitManager UnitManager;
+    public AudioManager AudioManager;
+    
     [SerializeField] private Texture2D _cursorTexture;
     
     public static GameManager Instance;
