@@ -478,17 +478,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1777969248 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8982009609416644378, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
-  m_PrefabInstance: {fileID: 1436281115466165292}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b369e73f0a24a0a9726de726114bdd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1436281115466165292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -497,10 +486,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 25384872111565768, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
-      propertyPath: ResourceManager
-      value: 
-      objectReference: {fileID: 1777969248}
     - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
       propertyPath: _enemyWaveSpawner
       value: 
