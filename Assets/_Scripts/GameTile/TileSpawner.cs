@@ -9,7 +9,7 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
     public Transform tileParent;
     private GameObject spawnedTile;
     private TileRequirement tileRequirement;
-    //private TileType tileType;
+    public TileType tileType;
 
     private void Start(){
         // tilePrefab = gameManager.tileConfig.basicPrefab;
