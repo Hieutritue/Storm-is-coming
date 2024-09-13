@@ -27,13 +27,13 @@ public class Tile : BaselineManager
         Vector2Int[] directions = new Vector2Int[]
         {
             new(-1, -1), // bottom left
-            new(0, -1),  // bottom
-            new(1, -1),  // bottom right
-            new(-1, 0),  // left
-            new(1, 0),   // right
-            new(-1, 1),  // top left
-            new(0, 1),   // top
-            new(1, 1)    // top right
+            new(0, -1), // bottom
+            new(1, -1), // bottom right
+            new(-1, 0), // left
+            new(1, 0), // right
+            new(-1, 1), // top left
+            new(0, 1), // top
+            new(1, 1) // top right
         };
 
         // Get the position of this tile in the grid
@@ -83,7 +83,8 @@ public class Tile : BaselineManager
 }
 
 [Serializable]
-public enum TileType {
+public enum TileType
+{
     Lumberjack,
     SheepFarm,
     Forger,
@@ -91,4 +92,16 @@ public enum TileType {
     House,
     Barrack,
     WeatherMachine
+}
+
+public enum Direction
+{
+    BottomLeft,
+    Bottom,
+    BottomRight,
+    Left,
+    Right,
+    TopLeft,
+    Top,
+    TopRight
 }

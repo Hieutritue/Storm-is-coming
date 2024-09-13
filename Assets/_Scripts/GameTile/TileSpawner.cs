@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,7 +12,7 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
     //private TileType tileType;
 
     private void Start(){
-        //tilePrefab = gameManager.tileConfig.basicPrefab;
+        // tilePrefab = gameManager.tileConfig.basicPrefab;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
