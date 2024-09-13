@@ -131,6 +131,8 @@ public class BaseUnit : MonoBehaviour
 
     public void DealDamage()
     {
+        if(!TargetInRange) return;
+        
         if (_doesAoe)
         {
             var targetUnits =
