@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitManager: {fileID: 4012675993352713399}
   AudioManager: {fileID: 3562265338570098871}
-  ResourceManager: {fileID: 0}
+  ResourceManager: {fileID: 8982009609416644378}
   _cursorTexture: {fileID: 2800000, guid: 165a65464593ce741bc832970ea6c18c, type: 3}
 --- !u!1 &8801129531137685166
 GameObject:
