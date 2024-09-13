@@ -4,18 +4,23 @@ using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameTileManager : BaselineManager
 {
     public GameObject[,] grid = new GameObject[5, 5];
-    public SerializedDictionary<Vector2Int,GameObject> tileDictionary; 
+    public SerializedDictionary<Vector2Int,GameObject> gridDictionary; 
+    
+    public Tile[,] gridTile = new Tile[5, 5];
+    public SerializedDictionary<Vector2Int,Tile> tileDictionary;
+    
     public Transform tileParent;
 
     public GameObject currentHoldingTile;
     public void Start(){
         gameManager = this;
 
-        tileDictionary = new SerializedDictionary<Vector2Int, GameObject>();
+        gridDictionary = new SerializedDictionary<Vector2Int, GameObject>();
         int gridWidth = grid.GetLength(0); // Assuming the grid is a square
         for (int i = 0; i < tileParent.childCount; i++)
         {
@@ -24,8 +29,55 @@ public class GameTileManager : BaselineManager
             int y = i / gridWidth;
             Vector2Int tileLocation = new(x, y);
             grid[x, y] = tile;
-            tileDictionary.Add(tileLocation, tile);
+            gridDictionary.Add(tileLocation, tile);
+            
+            if (tile.transform.childCount > 0)
+            {
+                Tile tileComponent = tile.transform.GetChild(0).GetComponent<Tile>();
+                gridTile[x, y] = tileComponent;
+                tileDictionary.Add(tileLocation, tileComponent);
+            }
         }
+    }
+
+    public void CheckAllTile()
+    {
+        foreach (var g in gridDictionary.Values)
+        {
+            if (g.transform.childCount > 0)
+            {
+                Tile tile = g.transform.GetChild(0).GetComponent<Tile>();
+                tile.CheckSurrounding();
+            }
+        }
+    }
+
+    public Vector2Int GetPosition(Tile tile, bool useDict){
+        switch (useDict) {
+            case false:
+                for (int x = 0; x < grid.GetLength(0); x++)
+                {
+                    for (int y = 0; y < grid.GetLength(1); y++)
+                    {
+                        if (grid[x, y] == tile.gameObject)
+                        {
+                            return new Vector2Int(x, y);
+                        }
+                    }
+                }
+                break;
+            case true:
+                foreach (var kvp in tileDictionary)
+                {
+                    if (kvp.Value == tile)
+                    {
+                        return kvp.Key;
+                    }
+                }
+                break;
+        }
+
+        return new Vector2Int(-1, -1);
     }
 
     [Button]
@@ -34,8 +86,8 @@ public class GameTileManager : BaselineManager
         int y = UnityEngine.Random.Range(1, 5);
         Vector2Int tileLocation = new(x, y);
 
-        if (tileDictionary.ContainsKey(tileLocation)) {
-            GameObject tile = tileDictionary[tileLocation];
+        if (gridDictionary.ContainsKey(tileLocation)) {
+            GameObject tile = gridDictionary[tileLocation];
             Debug.Log("Tile at " + x + ", " + y + " is " + tile.name);
             GameObject randomTile = grid[x, y];
             Debug.Log("Tile at " + x + ", " + y + " Array is " + randomTile.name);

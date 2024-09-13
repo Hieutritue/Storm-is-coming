@@ -46,6 +46,7 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
             spawnedTile.transform.SetParent(spawnedTile.GetComponent<Tile>().parentAfterDrag);
             gameManager.currentHoldingTile = null;
             spawnedTile = null;
+            gameManager.CheckAllTile();
         }
     }
 }

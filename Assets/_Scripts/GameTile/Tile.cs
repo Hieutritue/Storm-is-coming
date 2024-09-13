@@ -4,41 +4,12 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Tile : BaselineManager, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Tile : BaselineManager
 {
     public Image image;
     [HideInInspector] public Transform parentAfterDrag;
     public bool isTemporary = false;
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        if (!isTemporary)
-        {
-            gameManager.currentHoldingTile = gameObject;
-            parentAfterDrag = transform.parent;
-            transform.SetParent(transform.root);
-            transform.SetAsLastSibling();
-            SetRaycast();
-        }
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (!isTemporary)
-        {
-            transform.position = eventData.position;
-        }
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        if (!isTemporary)
-        {
-            gameManager.currentHoldingTile = null;
-            transform.SetParent(parentAfterDrag);
-            SetRaycast();
-        }
-    }
+    public List<Tile> surroundingHouses = new();
 
     public void SetRaycast()
     {
@@ -47,6 +18,40 @@ public class Tile : BaselineManager, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void CheckSurrounding()
     {
-        // Implementation for checking surrounding tiles
+        // Define offsets for all 8 directions
+        Vector2Int[] directions = new Vector2Int[]
+        {
+            new(-1, -1), // bottom left
+            new(0, -1),  // bottom
+            new(1, -1),  // bottom right
+            new(-1, 0),  // left
+            new(1, 0),   // right
+            new(-1, 1),  // top left
+            new(0, 1),   // top
+            new(1, 1)    // top right
+        };
+
+        // Get the position of this tile in the grid
+        Vector2Int thisPosGird = gameManager.GetPosition(this, false);
+        Vector2Int thisPos = gameManager.GetPosition(this, true);
+
+        // Clear the surroundingHouses list
+        surroundingHouses.Clear();
+
+        // For each direction, get the neighboring tile
+        foreach (Vector2Int dir in directions)
+        {
+            Vector2Int neighborPos = thisPos + dir;
+
+            // Check if the neighboring position is within the grid
+            if (gameManager.tileDictionary.ContainsKey(neighborPos))
+            {
+                // Get the neighboring tile
+                Tile neighborTile = gameManager.tileDictionary[neighborPos];
+
+                // Add the neighboring tile to the surroundingHouses list
+                surroundingHouses.Add(neighborTile);
+            }
+        }
     }
 }
