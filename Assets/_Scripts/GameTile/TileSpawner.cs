@@ -9,10 +9,10 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
     public Transform tileParent;
     private GameObject spawnedTile;
     private TileRequirement tileRequirement;
-    private TileType tileType;
+    //private TileType tileType;
 
     private void Start(){
-        tilePrefab = gameManager.tileConfig.basicPrefab;
+        //tilePrefab = gameManager.tileConfig.basicPrefab;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -52,6 +52,7 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
             spawnedTile.transform.SetParent(spawnedTile.GetComponent<Tile>().parentAfterDrag);
             gameManager.currentHoldingTile = null;
             spawnedTile = null;
+            gameManager.CheckForTile();
             gameManager.CheckAllTile();
         }
     }

@@ -37,7 +37,7 @@ public class Tile : BaselineManager
         };
 
         // Get the position of this tile in the grid
-        Vector2Int thisPosGird = gameManager.GetPosition(this, false);
+        Vector2Int thisPosGrid = gameManager.GetPosition(this, false);
         Vector2Int thisPos = gameManager.GetPosition(this, true);
 
         // Clear the surroundingHouses list
@@ -48,8 +48,8 @@ public class Tile : BaselineManager
         {
             Vector2Int neighborPos = thisPos + dir;
 
-            // Check if the neighboring position is within the grid
-            if (gameManager.tileDictionary.ContainsKey(neighborPos))
+            // Check if the neighboring position is within the grid and both coordinates are non-negative
+            if (CheckBoundary(neighborPos.x , neighborPos.y) && gameManager.tileDictionary.ContainsKey(neighborPos))
             {
                 // Get the neighboring tile
                 Tile neighborTile = gameManager.tileDictionary[neighborPos];
@@ -58,6 +58,11 @@ public class Tile : BaselineManager
                 surroundingHouses.Add(neighborTile);
             }
         }
+    }
+
+    private bool CheckBoundary(int x, int y) 
+    {
+        return x >= 0 && y >= 0 && x < 4 && y < 4;
     }
 
     public void Upgrade()

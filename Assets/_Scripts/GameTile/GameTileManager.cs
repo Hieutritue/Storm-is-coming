@@ -19,6 +19,9 @@ public class GameTileManager : BaselineManager
     public GameObject currentHoldingTile;
 
     public TileConfig tileConfig;
+
+    public WindDirection windDirection;
+
     public void Start(){
         gameManager = this;
 
@@ -38,6 +41,27 @@ public class GameTileManager : BaselineManager
                 Tile tileComponent = tile.transform.GetChild(0).GetComponent<Tile>();
                 gridTile[x, y] = tileComponent;
                 tileDictionary.Add(tileLocation, tileComponent);
+            }
+        }
+
+        CheckForTile();
+    }
+
+    public void CheckForTile()
+    {
+        foreach (var grid in gridDictionary){
+            if (grid.Value.transform.childCount > 0)
+            {
+                Tile tile = grid.Value.transform.GetChild(0).GetComponent<Tile>();
+                Vector2Int tileLocation = grid.Key;
+                if (gridTile[tileLocation.x, tileLocation.y] == null) // Check if the tile already exists
+                {
+                    gridTile[tileLocation.x, tileLocation.y] = tile;
+                }
+                if (!tileDictionary.ContainsKey(tileLocation)) // Check if the tile already exists
+                {
+                    tileDictionary.Add(tileLocation, tile);
+                }
             }
         }
     }
@@ -97,4 +121,16 @@ public class GameTileManager : BaselineManager
             Debug.Log("No tile found at " + x + ", " + y);
         }
     }
+
+    public int GetTileDistance() {
+        return -1;
+    }
+}
+
+[Serializable]
+public enum WindDirection{
+    North,
+    East,
+    South,
+    West
 }
