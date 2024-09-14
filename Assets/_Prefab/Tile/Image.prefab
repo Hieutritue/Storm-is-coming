@@ -95,7 +95,16 @@ MonoBehaviour:
   image: {fileID: 4686336371072409464}
   parentAfterDrag: {fileID: 0}
   isTemporary: 0
-  level: 1
+  level: 0
   tileType: 0
-  output: 0
-  MaxLevel: 3
+  MaxLevel: 2
+  ProductPerDay:
+  - 0
+  _productCost:
+  - WoodCost: 0
+    MeatCost: 0
+    IronCost: 0
+    GoldCost: 0
+    PawnCost: 0
+    ArcherCost: 0
+    KnightCost: 0

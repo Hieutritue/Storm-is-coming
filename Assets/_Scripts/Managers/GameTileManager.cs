@@ -6,6 +6,7 @@ using AYellowpaper.SerializedCollections;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = System.Random;
 
 public class GameTileManager : MonoBehaviour
 {
@@ -62,29 +63,29 @@ public class GameTileManager : MonoBehaviour
             }
         }
 
-        CheckForTile();
+        // CheckForTile();
     }
 
-    public void CheckForTile()
-    {
-        foreach (var grid in gridDictionary)
-        {
-            if (grid.Value.transform.childCount > 0)
-            {
-                Tile tile = grid.Value.transform.GetChild(0).GetComponent<Tile>();
-                Vector2Int tileLocation = grid.Key;
-                if (gridTile[tileLocation.x, tileLocation.y] == null) // Check if the tile already exists
-                {
-                    gridTile[tileLocation.x, tileLocation.y] = tile;
-                }
-
-                if (!tileDictionary.ContainsKey(tileLocation)) // Check if the tile already exists
-                {
-                    tileDictionary.Add(tileLocation, tile);
-                }
-            }
-        }
-    }
+    // public void CheckForTile()
+    // {
+    //     foreach (var grid in gridDictionary)
+    //     {
+    //         if (grid.Value.transform.childCount > 0)
+    //         {
+    //             Tile tile = grid.Value.transform.GetChild(0).GetComponent<Tile>();
+    //             Vector2Int tileLocation = grid.Key;
+    //             if (gridTile[tileLocation.x, tileLocation.y] == null) // Check if the tile already exists
+    //             {
+    //                 gridTile[tileLocation.x, tileLocation.y] = tile;
+    //             }
+    //
+    //             if (!tileDictionary.ContainsKey(tileLocation)) // Check if the tile already exists
+    //             {
+    //                 tileDictionary.Add(tileLocation, tile);
+    //             }
+    //         }
+    //     }
+    // }
     //
     // public void CheckAllTile()
     // {
@@ -163,6 +164,15 @@ public class GameTileManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow)) ShiftByWind(new Vector2Int(1, 0));
         if (Input.GetKeyDown(KeyCode.UpArrow)) ShiftByWind(new Vector2Int(0, -1));
         if (Input.GetKeyDown(KeyCode.DownArrow)) ShiftByWind(new Vector2Int(0, 1));
+    }
+
+    public void CallThunder()
+    {
+        var slotToZap = Slots[new Random().Next(0, Slots.Count - 1)];
+        
+        //TODO: visual
+        
+        Destroy(slotToZap.CurrentTile.gameObject);
     }
 
     public void ShiftByWind(Vector2Int dir)

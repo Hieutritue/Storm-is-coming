@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class TimeManager : MonoBehaviour
+public class TimeLineManager : MonoBehaviour
 {
     [ReadOnly] public int CurrentWeek = 1;
     [ReadOnly] public int CurrentDay = 1;
@@ -25,16 +25,16 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        if(!_eventWeeks.Any()) return; //TODO: win
-        
+        if (!_eventWeeks.Any()) return; //TODO: win
+
         if (CurrentWeek == _eventWeeks[0].Week)
         {
-            _eventWeeks[0].CallStorm();
-            _enemyWaveSpawner.SpawnWave(_eventWeeks[0].EnemyWave);
-            
+            CallStorm(_eventWeeks[0].Storm);
+            CallEnemyWave(_eventWeeks[0].EnemyWave);
+
             _eventWeeks.RemoveAt(0);
         }
-        
+
         _timer += Time.deltaTime;
         if (_timer >= SecondsPerGameDay)
         {
@@ -48,7 +48,37 @@ public class TimeManager : MonoBehaviour
             }
         }
     }
-    
+
+    public void CallStorm(string storm)
+    {
+        var gtm = GameManager.Instance.GameTileManager;
+        foreach (var eventChar in storm)
+        {
+            switch (eventChar)
+            {
+                case 'u':
+                    gtm.ShiftByWind(new Vector2Int(0, -1));
+                    break;
+                case 'd':
+                    gtm.ShiftByWind(new Vector2Int(0, 1));
+                    break;
+                case 'l':
+                    gtm.ShiftByWind(new Vector2Int(-1, 0));
+                    break;
+                case 'r':
+                    gtm.ShiftByWind(new Vector2Int(1, 0));
+                    break;
+                case 'z': break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void CallEnemyWave(EnemyWave enemyWave)
+    {
+        _enemyWaveSpawner.SpawnWave(enemyWave);
+    }
 }
 
 [Serializable]
@@ -57,9 +87,4 @@ public class EventOfWeek
     public int Week;
     public string Storm;
     public EnemyWave EnemyWave;
-
-    public void CallStorm()
-    {
-        // throw new NotImplementedException();
-    }
 }

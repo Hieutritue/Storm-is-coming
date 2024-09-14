@@ -68,20 +68,20 @@ public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
     }
 
-    public void CheckForresourceAvailability()
-    {
-        var rm = GameManager.Instance.ResourceManager;
-
-        if (rm.CheckEnoughResources(tileRequirement))
-        {
-            rm.Wood -= tileRequirement.wood;
-            rm.Meat -= tileRequirement.meat;
-            rm.Iron -= tileRequirement.iron;
-            rm.Gold -= tileRequirement.gold;
-        }
-        else
-        {
-            Destroy(spawnedTile);
-        }
-    }
+    // public void CheckForresourceAvailability()
+    // {
+    //     var rm = GameManager.Instance.ResourceManager;
+    //
+    //     if (rm.CheckEnoughResources(tileRequirement))
+    //     {
+    //         rm.Wood -= tileRequirement.wood;
+    //         rm.Meat -= tileRequirement.meat;
+    //         rm.Iron -= tileRequirement.iron;
+    //         rm.Gold -= tileRequirement.gold;
+    //     }
+    //     else
+    //     {
+    //         Destroy(spawnedTile);
+    //     }
+    // }
 }

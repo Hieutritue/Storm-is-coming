@@ -44,7 +44,7 @@ public class Tile : MonoBehaviour
         if (!EnoughResourceToWork()) return;
 
         _timer += Time.deltaTime;
-        if (_timer >= TimeManager.SecondsPerGameDay / ProductPerDay[level])
+        if (_timer >= TimeLineManager.SecondsPerGameDay / ProductPerDay[level])
             Produce();
     }
 
