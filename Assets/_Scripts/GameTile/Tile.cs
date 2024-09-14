@@ -20,7 +20,10 @@ public class Tile : MonoBehaviour
     public int level;
     public TileType tileType;
     public int MaxLevel;
+    
+    [Header("Info for each level")]
     public float[] ProductPerDay;
+    [SerializeField] private Sprite[] _sprites;
     [SerializeField] private ProductCost[] _productCost;
 
     private float _timer = 0;
@@ -89,54 +92,13 @@ public class Tile : MonoBehaviour
         image.raycastTarget = !image.raycastTarget;
     }
 
-//     public void CheckSurrounding()
-//     {
-//         // Define offsets for all 8 directions
-//         Vector2Int[] directions = new Vector2Int[]
-//         {
-//             new(-1, -1), // bottom left
-//             new(0, -1), // bottom
-//             new(1, -1), // bottom right
-//             new(-1, 0), // left
-//             new(1, 0), // right
-//             new(-1, 1), // top left
-//             new(0, 1), // top
-//             new(1, 1) // top right
-//         };
-//
-//         // Get the position of this tile in the grid
-//         Vector2Int thisPosGrid = gameManager.GetPosition(this, false);
-//         Vector2Int thisPos = gameManager.GetPosition(this, true);
-//
-//         // Clear the surroundingHouses list
-//         surroundingHouses.Clear();
-//
-//         // For each direction, get the neighboring tile
-//         foreach (Vector2Int dir in directions)
-//         {
-//             Vector2Int neighborPos = thisPos + dir;
-//
-//             // Check if the neighboring position is within the grid and both coordinates are non-negative
-//             if (CheckBoundary(neighborPos.x , neighborPos.y) && gameManager.tileDictionary.ContainsKey(neighborPos))
-//             {
-//                 // Get the neighboring tile
-//                 Tile neighborTile = gameManager.tileDictionary[neighborPos];
-//
-//                 // Add the neighboring tile to the surroundingHouses list
-//                 surroundingHouses.Add(neighborTile);
-//             }
-//         }
-//     }
-//
-//     private bool CheckBoundary(int x, int y) 
-//     {
-//         return x >= 0 && y >= 0 && x < 4 && y < 4;
-//     }
-//
     public void Upgrade()
     {
         Debug.Log($"Upgraded: {gameObject.name}");
+        
         level++;
+
+        image.sprite = _sprites[level];
     }
 }
 
