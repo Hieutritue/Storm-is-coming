@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4686336371072409464}
   - component: {fileID: 535172866679089657}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Gold Sanctum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,14 +59,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 068879acfda53a541b6a58e819b496a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,6 +88,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f0b0cbd22805346bd129c6581a491f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Pos:
+    X: 0
+    Y: 0
+  OccupiedSlot: {fileID: 0}
   image: {fileID: 4686336371072409464}
   parentAfterDrag: {fileID: 0}
   isTemporary: 0
+  level: 0
+  tileType: 3
+  MaxLevel: 2
+  ProductPerDay:
+  - 1
+  - 2
+  - 3
+  _sprites:
+  - {fileID: 21300000, guid: 068879acfda53a541b6a58e819b496a2, type: 3}
+  - {fileID: 21300000, guid: f1225afc2ddee3a42bdff9617ce07ee0, type: 3}
+  - {fileID: 21300000, guid: ea70ee69286fe6c4f9a3a69e2d7042b6, type: 3}
+  _productCost:
+  - WoodCost: 0
+    MeatCost: 0
+    IronCost: 0
+    GoldCost: 0
+    PawnCost: 0
+    ArcherCost: 0
+    KnightCost: 0
+  - WoodCost: 0
+    MeatCost: 0
+    IronCost: 0
+    GoldCost: 0
+    PawnCost: 0
+    ArcherCost: 0
+    KnightCost: 0
+  - WoodCost: 0
+    MeatCost: 0
+    IronCost: 0
+    GoldCost: 0
+    PawnCost: 0
+    ArcherCost: 0
+    KnightCost: 0

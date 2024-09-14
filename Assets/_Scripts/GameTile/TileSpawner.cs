@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public GameObject tilePrefab;
+    public Tile tilePrefab;
     public Transform tileParent;
-    private GameObject spawnedTile;
+    private Tile spawnedTile;
     private TileRequirement tileRequirement;
-    public TileType tileType;
 
     private void Start(){
         // tilePrefab = gameManager.tileConfig.basicPrefab;
@@ -25,15 +24,16 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
         RectTransform spawnedRectTransform = spawnedTile.GetComponent<RectTransform>();
         spawnedRectTransform.sizeDelta = prefabRectTransform.sizeDelta;
         
-        spawnedTile.GetComponent<Tile>().isTemporary = true;
-        spawnedTile.GetComponent<Tile>().SetRaycast();
-        gameManager.currentHoldingTile = spawnedTile;
+        spawnedTile.isTemporary = true;
+        spawnedTile.SetRaycast();
+        GameManager.Instance.GameTileManager.currentHoldingTile = spawnedTile;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         if (spawnedTile != null)
         {
+            spawnedTile.ChangeTransparency(0.4f);
             spawnedTile.transform.position = eventData.position;
         }
     }
@@ -44,33 +44,44 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
         {
             if (spawnedTile.GetComponent<Tile>().parentAfterDrag == null)
             {
-                Destroy(spawnedTile);
+                Destroy(spawnedTile.gameObject);
+                return;
             }
             
-            spawnedTile.GetComponent<Tile>().isTemporary = false;
-            spawnedTile.GetComponent<Tile>().SetRaycast();
-            spawnedTile.transform.SetParent(spawnedTile.GetComponent<Tile>().parentAfterDrag);
-            gameManager.currentHoldingTile = null;
+            spawnedTile.ChangeTransparency(1);
+            
+            spawnedTile.isTemporary = false;
+            spawnedTile.SetRaycast();
+            spawnedTile.transform.SetParent(spawnedTile.parentAfterDrag);
+
+            var slotToDropOn = spawnedTile.parentAfterDrag.GetComponent<Slot>();
+            slotToDropOn.CurrentTile = spawnedTile;
+            spawnedTile.OccupiedSlot = slotToDropOn;
+            spawnedTile.Pos = slotToDropOn.Pos;
+            GameManager.Instance.GameTileManager.Tiles.Add(spawnedTile);
+            
+            
+            GameManager.Instance.GameTileManager.currentHoldingTile = null;
             spawnedTile = null;
-            gameManager.CheckForTile();
-            gameManager.CheckAllTile();
+            // GameManager.Instance.GameTileManager.CheckForTile();
+            // GameManager.Instance.GameTileManager.CheckAllTile();
         }
     }
 
-    public void CheckForresourceAvailability()
-    {
-        var rm = GameManager.Instance.ResourceManager;
-
-        if (rm.CheckEnoughResources(tileRequirement))
-        {
-            rm.Wood -= tileRequirement.wood;
-            rm.Meat -= tileRequirement.meat;
-            rm.Iron -= tileRequirement.iron;
-            rm.Gold -= tileRequirement.gold;
-        }
-        else
-        {
-            Destroy(spawnedTile);
-        }
-    }
+    // public void CheckForresourceAvailability()
+    // {
+    //     var rm = GameManager.Instance.ResourceManager;
+    //
+    //     if (rm.CheckEnoughResources(tileRequirement))
+    //     {
+    //         rm.Wood -= tileRequirement.wood;
+    //         rm.Meat -= tileRequirement.meat;
+    //         rm.Iron -= tileRequirement.iron;
+    //         rm.Gold -= tileRequirement.gold;
+    //     }
+    //     else
+    //     {
+    //         Destroy(spawnedTile);
+    //     }
+    // }
 }

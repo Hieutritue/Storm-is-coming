@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     public UnitManager UnitManager;
     public AudioManager AudioManager;
     public ResourceManager ResourceManager;
+    public UIManager UIManager;
+    public GameTileManager GameTileManager;
+    public TimeLineManager TimeLineManager;
     
     [SerializeField] private Texture2D _cursorTexture;
     

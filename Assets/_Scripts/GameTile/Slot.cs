@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -5,20 +6,34 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : BaselineManager, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+[Serializable]
+public class Slot : MonoBehaviour ,IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public Pos Pos;
+    public Tile CurrentTile;
+    
     private bool isUnderCursor = false;
+    private Image _image;
+
+    private void Start()
+    {
+        _image = GetComponent<Image>();
+    }
 
     private void Update()
     {
-        if (isUnderCursor)
+        var obj = GameManager.Instance.GameTileManager.currentHoldingTile;
+        
+        if(Input.GetMouseButtonUp(0)) _image.color = new Color(1, 1, 1, 0);
+        
+        if (isUnderCursor && obj)
         {
-            GetComponent<Image>().color = Color.green;
+            _image.sprite = obj.Image.sprite;
+            _image.color = new Color(1, 1, 1, 0.7f);
         }
         else
         {
-            // Reset the slot color to its base color when the cursor is not over it
-            GetComponent<Image>().color = Color.white; // Replace with your slot's base color
+            _image.color = new Color(1, 1, 1, 0);
         }
     }
 
@@ -37,9 +52,8 @@ public class Slot : BaselineManager, IDropHandler, IPointerEnterHandler, IPointe
 
     public void OnDrop(PointerEventData eventData)
     {
-        GameObject droppedObject = gameManager.currentHoldingTile;
-        Tile tile = droppedObject.GetComponent<Tile>();
-
+        Tile tile = GameManager.Instance.GameTileManager.currentHoldingTile;
+        
         if (!tile.isTemporary)
         {
             if (transform.childCount != 0)
@@ -61,5 +75,17 @@ public class Slot : BaselineManager, IDropHandler, IPointerEnterHandler, IPointe
                 tile.parentAfterDrag = transform;
             }
         }
+    }
+}
+[Serializable]
+public struct Pos
+{
+    public int X;
+    public int Y;
+
+    public Pos(int x, int y)
+    {
+        X = x;
+        Y = y;
     }
 }

@@ -7,22 +7,24 @@ using System;
 
 public class GeneratorTile : Tile
 {
-    public void Work() 
+    public override void Produce() 
     {
+        base.Produce();
+        
         var rm = GameManager.Instance.ResourceManager;
         switch (tileType)
         {
-            case TileType.Lumberjack:
-                rm.Wood += output;
+            case TileType.Wood:
+                rm.Wood += 1;
                 break;
-            case TileType.SheepFarm:
-                rm.Meat += output;
+            case TileType.Meat:
+                rm.Meat += 1;
                 break;
-            case TileType.Forger:
-                rm.Iron += output;
+            case TileType.Iron:
+                rm.Iron += 1;
                 break;
-            case TileType.Smelter:
-                rm.Gold += output;
+            case TileType.Gold:
+                rm.Gold += 1;
                 break;
         }
     }

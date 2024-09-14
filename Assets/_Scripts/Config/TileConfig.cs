@@ -36,5 +36,8 @@ public class TileRequirement
 [Serializable]
 public class WorkRequirement
 {
-
+    public int meat;
+    public int wood;
+    public int iron;
+    public int gold;
 }

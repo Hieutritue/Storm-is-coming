@@ -10,4 +10,7 @@ public class UnitManager : MonoBehaviour
     public List<BaseUnit> AllUnits = new ();
     public List<BaseUnit> AllEnemies => AllUnits.Where(u => !u.IsAlly).ToList();
     public List<BaseUnit> AllAllies => AllUnits.Where(u => u.IsAlly).ToList();
+
+    public AllySpawner AllySpawner;
+    
 }

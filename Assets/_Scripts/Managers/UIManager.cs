@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : BaselineManager 
+public class UIManager : MonoBehaviour 
 {
     private GameManager GM => GameManager.Instance;
 
@@ -17,9 +17,6 @@ public class UIManager : BaselineManager
     *   public TextMeshProUGUI myText;
     */
 
-    void Start() {
-        uiManager = this;
-    }
     
     public void UpdateResourceTexts() {
         foreach (var resource in resourceTexts) {
