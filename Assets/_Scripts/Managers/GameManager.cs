@@ -19,6 +19,6 @@ public class GameManager : MonoBehaviour
         if(Instance != null) Destroy(Instance);
         Instance = this;
         
-        Cursor.SetCursor(_cursorTexture,Vector2.zero, CursorMode.Auto);
+        //Cursor.SetCursor(_cursorTexture,Vector2.zero, CursorMode.Auto);
     }
 }
