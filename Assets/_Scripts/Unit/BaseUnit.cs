@@ -13,7 +13,8 @@ public class BaseUnit : MonoBehaviour
     public bool IsAlly;
 
     public Transform RealPosition;
-
+    public AllyType AllyType;
+    
     [SerializeField] private int _health;
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
@@ -105,7 +106,7 @@ public class BaseUnit : MonoBehaviour
     }
 
 
-    private void Die()
+    public void Die()
     {
         GameManager.Instance.AudioManager.PlayClip(ClipName.UnitDie);
         

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public GameObject tilePrefab;
     public Transform tileParent;
@@ -27,7 +27,7 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
         
         spawnedTile.GetComponent<Tile>().isTemporary = true;
         spawnedTile.GetComponent<Tile>().SetRaycast();
-        gameManager.currentHoldingTile = spawnedTile;
+        GameManager.Instance.GameTileManager.currentHoldingTile = spawnedTile;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -45,15 +45,26 @@ public class TileSpawner : BaselineManager, IBeginDragHandler, IDragHandler, IEn
             if (spawnedTile.GetComponent<Tile>().parentAfterDrag == null)
             {
                 Destroy(spawnedTile);
+                return;
             }
+
+            var tileComponent = spawnedTile.GetComponent<Tile>();
             
-            spawnedTile.GetComponent<Tile>().isTemporary = false;
-            spawnedTile.GetComponent<Tile>().SetRaycast();
-            spawnedTile.transform.SetParent(spawnedTile.GetComponent<Tile>().parentAfterDrag);
-            gameManager.currentHoldingTile = null;
+            tileComponent.isTemporary = false;
+            tileComponent.SetRaycast();
+            spawnedTile.transform.SetParent(tileComponent.parentAfterDrag);
+
+            var slotToDropOn = tileComponent.parentAfterDrag.GetComponent<Slot>();
+            slotToDropOn.CurrentTile = tileComponent;
+            tileComponent.OccupiedSlot = slotToDropOn;
+            tileComponent.Pos = slotToDropOn.Pos;
+            GameManager.Instance.GameTileManager.Tiles.Add(tileComponent);
+            
+            
+            GameManager.Instance.GameTileManager.currentHoldingTile = null;
             spawnedTile = null;
-            gameManager.CheckForTile();
-            gameManager.CheckAllTile();
+            // gameManager.CheckForTile();
+            // gameManager.CheckAllTile();
         }
     }
 

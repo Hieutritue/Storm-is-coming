@@ -46,5 +46,6 @@ public enum AllyType
 {
     Pawn,
     Archer,
-    Warrior
+    Warrior,
+    Demon
 }

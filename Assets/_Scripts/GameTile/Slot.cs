@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -5,9 +6,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : BaselineManager, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+[Serializable]
+public class Slot : MonoBehaviour ,IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public Pos Pos;
+    public Tile CurrentTile;
+    
     private bool isUnderCursor = false;
+
+    private void Start()
+    {
+        // Debug.Log($"{gameObject.name}: {Pos.X}, {Pos.Y}");
+    }
 
     private void Update()
     {
@@ -37,7 +47,7 @@ public class Slot : BaselineManager, IDropHandler, IPointerEnterHandler, IPointe
 
     public void OnDrop(PointerEventData eventData)
     {
-        GameObject droppedObject = gameManager.currentHoldingTile;
+        GameObject droppedObject = GameManager.Instance.GameTileManager.currentHoldingTile;
         Tile tile = droppedObject.GetComponent<Tile>();
 
         if (!tile.isTemporary)
@@ -61,5 +71,17 @@ public class Slot : BaselineManager, IDropHandler, IPointerEnterHandler, IPointe
                 tile.parentAfterDrag = transform;
             }
         }
+    }
+}
+[Serializable]
+public struct Pos
+{
+    public int X;
+    public int Y;
+
+    public Pos(int x, int y)
+    {
+        X = x;
+        Y = y;
     }
 }

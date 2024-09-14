@@ -11,7 +11,7 @@ public class TimeManager : MonoBehaviour
     [ReadOnly] public int CurrentWeek = 1;
     [ReadOnly] public int CurrentDay = 1;
 
-    [SerializeField] private float _secondsPerGameDay;
+    public static float SecondsPerGameDay;
     [SerializeField] private List<EventOfWeek> _eventWeeks;
 
     [SerializeField] private EnemyWaveSpawner _enemyWaveSpawner;
@@ -36,7 +36,7 @@ public class TimeManager : MonoBehaviour
         }
         
         _timer += Time.deltaTime;
-        if (_timer >= _secondsPerGameDay)
+        if (_timer >= SecondsPerGameDay)
         {
             CurrentDay++;
             _timer = 0;
