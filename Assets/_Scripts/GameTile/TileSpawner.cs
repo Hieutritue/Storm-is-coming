@@ -5,11 +5,10 @@ using UnityEngine.EventSystems;
 
 public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public GameObject tilePrefab;
+    public Tile tilePrefab;
     public Transform tileParent;
-    private GameObject spawnedTile;
+    private Tile spawnedTile;
     private TileRequirement tileRequirement;
-    public TileType tileType;
 
     private void Start(){
         // tilePrefab = gameManager.tileConfig.basicPrefab;
@@ -25,8 +24,8 @@ public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         RectTransform spawnedRectTransform = spawnedTile.GetComponent<RectTransform>();
         spawnedRectTransform.sizeDelta = prefabRectTransform.sizeDelta;
         
-        spawnedTile.GetComponent<Tile>().isTemporary = true;
-        spawnedTile.GetComponent<Tile>().SetRaycast();
+        spawnedTile.isTemporary = true;
+        spawnedTile.SetRaycast();
         GameManager.Instance.GameTileManager.currentHoldingTile = spawnedTile;
     }
 
@@ -34,6 +33,7 @@ public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         if (spawnedTile != null)
         {
+            spawnedTile.ChangeTransparency(0.4f);
             spawnedTile.transform.position = eventData.position;
         }
     }
@@ -44,27 +44,27 @@ public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         {
             if (spawnedTile.GetComponent<Tile>().parentAfterDrag == null)
             {
-                Destroy(spawnedTile);
+                Destroy(spawnedTile.gameObject);
                 return;
             }
-
-            var tileComponent = spawnedTile.GetComponent<Tile>();
             
-            tileComponent.isTemporary = false;
-            tileComponent.SetRaycast();
-            spawnedTile.transform.SetParent(tileComponent.parentAfterDrag);
+            spawnedTile.ChangeTransparency(1);
+            
+            spawnedTile.isTemporary = false;
+            spawnedTile.SetRaycast();
+            spawnedTile.transform.SetParent(spawnedTile.parentAfterDrag);
 
-            var slotToDropOn = tileComponent.parentAfterDrag.GetComponent<Slot>();
-            slotToDropOn.CurrentTile = tileComponent;
-            tileComponent.OccupiedSlot = slotToDropOn;
-            tileComponent.Pos = slotToDropOn.Pos;
-            GameManager.Instance.GameTileManager.Tiles.Add(tileComponent);
+            var slotToDropOn = spawnedTile.parentAfterDrag.GetComponent<Slot>();
+            slotToDropOn.CurrentTile = spawnedTile;
+            spawnedTile.OccupiedSlot = slotToDropOn;
+            spawnedTile.Pos = slotToDropOn.Pos;
+            GameManager.Instance.GameTileManager.Tiles.Add(spawnedTile);
             
             
             GameManager.Instance.GameTileManager.currentHoldingTile = null;
             spawnedTile = null;
-            // gameManager.CheckForTile();
-            // gameManager.CheckAllTile();
+            // GameManager.Instance.GameTileManager.CheckForTile();
+            // GameManager.Instance.GameTileManager.CheckAllTile();
         }
     }
 

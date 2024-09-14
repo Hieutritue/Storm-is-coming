@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NaughtyAttributes;
@@ -11,12 +12,14 @@ public class TimeLineManager : MonoBehaviour
     [ReadOnly] public int CurrentWeek = 1;
     [ReadOnly] public int CurrentDay = 1;
 
-    public static float SecondsPerGameDay;
+    public float SecondsPerGameDay;
+    [SerializeField] private float _delayOfStormEvents;
     [SerializeField] private List<EventOfWeek> _eventWeeks;
 
     [SerializeField] private EnemyWaveSpawner _enemyWaveSpawner;
 
     private float _timer;
+    private bool _timeStopped;
 
     private void Start()
     {
@@ -25,11 +28,13 @@ public class TimeLineManager : MonoBehaviour
 
     private void Update()
     {
+        if(_timeStopped) return;
+        
         if (!_eventWeeks.Any()) return; //TODO: win
 
         if (CurrentWeek == _eventWeeks[0].Week)
         {
-            CallStorm(_eventWeeks[0].Storm);
+            StartCoroutine(CallStorm(_eventWeeks[0].Storm));
             CallEnemyWave(_eventWeeks[0].EnemyWave);
 
             _eventWeeks.RemoveAt(0);
@@ -49,8 +54,9 @@ public class TimeLineManager : MonoBehaviour
         }
     }
 
-    public void CallStorm(string storm)
+    public IEnumerator CallStorm(string storm)
     {
+        _timeStopped = true;
         var gtm = GameManager.Instance.GameTileManager;
         foreach (var eventChar in storm)
         {
@@ -72,7 +78,11 @@ public class TimeLineManager : MonoBehaviour
                 default:
                     break;
             }
+
+            yield return new WaitForSeconds(_delayOfStormEvents);
         }
+
+        _timeStopped = false;
     }
 
     public void CallEnemyWave(EnemyWave enemyWave)

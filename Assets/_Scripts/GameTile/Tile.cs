@@ -5,13 +5,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 using System.Linq;
+using UnityEngine.Serialization;
 
 public class Tile : MonoBehaviour
 {
     public Pos Pos;
     public Slot OccupiedSlot;
 
-    public Image image;
+    public Image Image;
     [HideInInspector] public Transform parentAfterDrag;
 
     [HideInInspector] public bool isTemporary = false;
@@ -27,6 +28,11 @@ public class Tile : MonoBehaviour
     [SerializeField] private ProductCost[] _productCost;
 
     private float _timer = 0;
+
+    private void Awake()
+    {
+        Image = GetComponent<Image>();
+    }
 
     bool EnoughResourceToWork()
     {
@@ -47,7 +53,7 @@ public class Tile : MonoBehaviour
         if (!EnoughResourceToWork()) return;
 
         _timer += Time.deltaTime;
-        if (_timer >= TimeLineManager.SecondsPerGameDay / ProductPerDay[level])
+        if (_timer >= GameManager.Instance.TimeLineManager.SecondsPerGameDay / ProductPerDay[level])
             Produce();
     }
 
@@ -72,6 +78,13 @@ public class Tile : MonoBehaviour
         }
     }
 
+    public void ChangeTransparency(float a)
+    {
+        var color = Image.color;
+        color.a = a;
+        Image.color = color;
+    }
+
     public void SetSlot(Slot newSlot)
     {
         Pos = newSlot.Pos;
@@ -89,7 +102,7 @@ public class Tile : MonoBehaviour
 
     public void SetRaycast()
     {
-        image.raycastTarget = !image.raycastTarget;
+        Image.raycastTarget = !Image.raycastTarget;
     }
 
     public void Upgrade()
@@ -98,7 +111,7 @@ public class Tile : MonoBehaviour
         
         level++;
 
-        image.sprite = _sprites[level];
+        Image.sprite = _sprites[level];
     }
 }
 

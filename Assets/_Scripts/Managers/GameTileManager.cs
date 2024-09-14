@@ -21,7 +21,7 @@ public class GameTileManager : MonoBehaviour
 
     public Transform tileParent;
 
-    public GameObject currentHoldingTile;
+    public Tile currentHoldingTile;
 
     public TileConfig tileConfig;
 
@@ -66,27 +66,27 @@ public class GameTileManager : MonoBehaviour
         // CheckForTile();
     }
 
-    // public void CheckForTile()
-    // {
-    //     foreach (var grid in gridDictionary)
-    //     {
-    //         if (grid.Value.transform.childCount > 0)
-    //         {
-    //             Tile tile = grid.Value.transform.GetChild(0).GetComponent<Tile>();
-    //             Vector2Int tileLocation = grid.Key;
-    //             if (gridTile[tileLocation.x, tileLocation.y] == null) // Check if the tile already exists
-    //             {
-    //                 gridTile[tileLocation.x, tileLocation.y] = tile;
-    //             }
-    //
-    //             if (!tileDictionary.ContainsKey(tileLocation)) // Check if the tile already exists
-    //             {
-    //                 tileDictionary.Add(tileLocation, tile);
-    //             }
-    //         }
-    //     }
-    // }
-    //
+    public void CheckForTile()
+    {
+        foreach (var grid in gridDictionary)
+        {
+            if (grid.Value.transform.childCount > 0)
+            {
+                Tile tile = grid.Value.transform.GetChild(0).GetComponent<Tile>();
+                Vector2Int tileLocation = grid.Key;
+                if (gridTile[tileLocation.x, tileLocation.y] == null) // Check if the tile already exists
+                {
+                    gridTile[tileLocation.x, tileLocation.y] = tile;
+                }
+    
+                if (!tileDictionary.ContainsKey(tileLocation)) // Check if the tile already exists
+                {
+                    tileDictionary.Add(tileLocation, tile);
+                }
+            }
+        }
+    }
+    
     // public void CheckAllTile()
     // {
     //     foreach (var g in gridDictionary.Values)

@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -92,14 +92,16 @@ MonoBehaviour:
     X: 0
     Y: 0
   OccupiedSlot: {fileID: 0}
-  image: {fileID: 4686336371072409464}
+  Image: {fileID: 4686336371072409464}
   parentAfterDrag: {fileID: 0}
   isTemporary: 0
   level: 0
   tileType: 0
-  MaxLevel: 2
+  MaxLevel: 0
   ProductPerDay:
   - 0
+  _sprites:
+  - {fileID: 21300000, guid: d556359acc46a124ba988635d4bea60a, type: 3}
   _productCost:
   - WoodCost: 0
     MeatCost: 0
