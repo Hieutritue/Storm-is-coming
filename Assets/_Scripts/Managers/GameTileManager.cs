@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AYellowpaper.SerializedCollections;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -26,6 +27,9 @@ public class GameTileManager : MonoBehaviour
     public TileConfig tileConfig;
 
     public WindDirection windDirection;
+
+    private float _travelTime = .2f;
+    private bool _moving;
 
     #region ldminh
 
@@ -177,6 +181,8 @@ public class GameTileManager : MonoBehaviour
 
     public void ShiftByWind(Vector2Int dir)
     {
+        if(_moving) return;
+         
         var orderedTiles = Tiles.OrderBy(s => s.Pos.X).ThenBy(s => s.Pos.Y).ToList();
         if (dir == Vector2Int.up || dir == Vector2Int.right)
             orderedTiles.Reverse();
@@ -209,18 +215,27 @@ public class GameTileManager : MonoBehaviour
                 slotToShiftTo = possibleSlot;
                 tile.SetSlot(slotToShiftTo);
             }
-            
-            tile.transform.SetParent(slotToShiftTo.transform);
-            tile.transform.localPosition = Vector3.zero;
 
-            if (slotToShiftTo.transform.childCount == 2)
-            {
-                var oldTile = slotToShiftTo.transform.GetChild(0).gameObject;
-                GameManager.Instance.GameTileManager.Tiles.Remove(oldTile.GetComponent<Tile>());
-                Destroy(oldTile);
+            _moving = true;
+            tile.transform.DOMove(slotToShiftTo.transform.position, _travelTime)
+                .OnComplete(() =>
+                {
+                    _moving = false;
+                    
+                    tile.transform.SetParent(slotToShiftTo.transform);
+                    tile.transform.localPosition = Vector3.zero;
+
+                    if (slotToShiftTo.transform.childCount == 2)
+                    {
+                        var oldTile = slotToShiftTo.transform.GetChild(0).gameObject;
+                        GameManager.Instance.GameTileManager.Tiles.Remove(oldTile.GetComponent<Tile>());
+                        Destroy(oldTile);
                 
-                tile.Upgrade();
-            }
+                        tile.Upgrade();
+                    }
+                });
+            
+            
         }
     }
 

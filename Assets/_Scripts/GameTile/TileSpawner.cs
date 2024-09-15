@@ -8,10 +8,18 @@ public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public Tile tilePrefab;
     public Transform tileParent;
     private Tile spawnedTile;
-    private TileRequirement tileRequirement;
+    public TileRequirement tileRequirement;
 
     private void Start(){
         // tilePrefab = gameManager.tileConfig.basicPrefab;
+    }
+
+    bool MeetRequirement()
+    {
+        var rm = GameManager.Instance.ResourceManager;
+        return tileRequirement.gold <= rm.Gold
+               && tileRequirement.wood <= rm.Wood
+               && tileRequirement.meat <= rm.Meat;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -25,6 +33,7 @@ public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         spawnedRectTransform.sizeDelta = prefabRectTransform.sizeDelta;
         
         spawnedTile.isTemporary = true;
+        spawnedTile.ProgressBar?.gameObject.SetActive(false);
         spawnedTile.SetRaycast();
         GameManager.Instance.GameTileManager.currentHoldingTile = spawnedTile;
     }
@@ -53,6 +62,10 @@ public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             spawnedTile.isTemporary = false;
             spawnedTile.SetRaycast();
             spawnedTile.transform.SetParent(spawnedTile.parentAfterDrag);
+            spawnedTile.ProgressBar?.gameObject.SetActive(true);
+            
+            if(!(spawnedTile is GeneratorTile || spawnedTile is MilitaryTile))
+                GameManager.Instance.UnitManager.Houses.Add(spawnedTile);
 
             var slotToDropOn = spawnedTile.parentAfterDrag.GetComponent<Slot>();
             slotToDropOn.CurrentTile = spawnedTile;

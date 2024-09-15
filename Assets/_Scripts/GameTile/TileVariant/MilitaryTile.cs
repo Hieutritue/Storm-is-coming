@@ -9,4 +9,9 @@ public class MilitaryTile : Tile
         
         GameManager.Instance.UnitManager.AllySpawner.Spawn((AllyType)level);
     }
+
+    public override bool EnoughResourceToWork()
+    {
+        return base.EnoughResourceToWork() && !GameManager.Instance.UnitManager.ReachedMaxCapacity;
+    }
 }

@@ -29,7 +29,6 @@ public class TileRequirement
 {
     public int meat;
     public int wood;
-    public int iron;
     public int gold;
 }
 

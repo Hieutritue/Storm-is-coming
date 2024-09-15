@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine.Serialization;
 
 public class Tile : MonoBehaviour
@@ -21,20 +22,24 @@ public class Tile : MonoBehaviour
     public int level;
     public TileType tileType;
     public int MaxLevel;
-    
-    [Header("Info for each level")]
-    public float[] ProductPerDay;
+
+    [Header("Info for each level")] public float[] ProductPerDay;
     [SerializeField] private Sprite[] _sprites;
     [SerializeField] private ProductCost[] _productCost;
+
+    [FormerlySerializedAs("_progressBar")] [HideInInspector]
+    public Slider ProgressBar;
 
     private float _timer = 0;
 
     private void Awake()
     {
         Image = GetComponent<Image>();
+        ProgressBar = GetComponentInChildren<Slider>();
+        if(ProgressBar) ProgressBar.value = 0;
     }
 
-    bool EnoughResourceToWork()
+    public virtual bool EnoughResourceToWork()
     {
         var cost = _productCost[level];
         var rm = GameManager.Instance.ResourceManager;
@@ -48,18 +53,41 @@ public class Tile : MonoBehaviour
                && cost.KnightCost <= um.AllAllies.Count(a => a.AllyType == AllyType.Warrior);
     }
 
+    private void OnDisable()
+    {
+        if(!(this is GeneratorTile || this is MilitaryTile) )
+            GameManager.Instance.UnitManager.Houses.Remove(this);
+    }
+
     private void Update()
     {
-        if (!EnoughResourceToWork()) return;
+        if (isTemporary)
+        {
+            return;
+        }
 
+        if (!EnoughResourceToWork()) return;
         _timer += Time.deltaTime;
+
+        if (ProgressBar)
+            ProgressBar.value =
+                _timer / (GameManager.Instance.TimeLineManager.SecondsPerGameDay / ProductPerDay[level]);
+
         if (_timer >= GameManager.Instance.TimeLineManager.SecondsPerGameDay / ProductPerDay[level])
+        {
+            _timer = 0;
             Produce();
+        }
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
     public virtual void Produce()
     {
+        ProgressBar.value = 0;
+        Image.DOColor(Color.yellow, .1f).OnComplete(() => { Image.DOColor(Color.white, 0.1f); });
+
+        Debug.Log("Produce");
+
         var cost = _productCost[level];
         var rm = GameManager.Instance.ResourceManager;
         var um = GameManager.Instance.UnitManager;
@@ -108,8 +136,11 @@ public class Tile : MonoBehaviour
     public void Upgrade()
     {
         Debug.Log($"Upgraded: {gameObject.name}");
-        
+
         level++;
+
+        transform.DOScale(Vector3.one * 1.2f,0.1f)
+            .OnComplete(()=>transform.DOScale(Vector3.one * 0.8f,.1f));
 
         Image.sprite = _sprites[level];
     }

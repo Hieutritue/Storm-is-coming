@@ -34,7 +34,6 @@ public class TimeLineManager : MonoBehaviour
 
         if (CurrentWeek == _eventWeeks[0].Week)
         {
-            StartCoroutine(CallStorm(_eventWeeks[0].Storm));
             CallEnemyWave(_eventWeeks[0].EnemyWave);
 
             _eventWeeks.RemoveAt(0);
@@ -95,6 +94,5 @@ public class TimeLineManager : MonoBehaviour
 public class EventOfWeek
 {
     public int Week;
-    public string Storm;
     public EnemyWave EnemyWave;
 }
