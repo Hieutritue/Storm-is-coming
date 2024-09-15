@@ -129,26 +129,23 @@ public class GameTileManager : MonoBehaviour
                 tile.SetSlot(slotToShiftTo);
             }
 
+            // tile.gameObject.SetActive(false);
             
+            tile.transform.SetParent(slotToShiftTo.transform, worldPositionStays: true);
+
+            if (slotToShiftTo.transform.childCount == 2)
+            {
+                var oldTile = slotToShiftTo.transform.GetChild(0).gameObject;
+                GameManager.Instance.GameTileManager.Tiles.Remove(oldTile.GetComponent<Tile>());
+                Destroy(oldTile);
+
+                tile.Upgrade();
+            }
 
             Moving = true;
+            // UniTask.Delay(50).ContinueWith(() => tile.gameObject.SetActive(true));
             tile.transform.DOMove(slotToShiftTo.transform.position, TravelTime);
-            UniTask.Delay((int)(TravelTime * 1000)).ContinueWith(() =>
-            {
-                tile.transform.SetParent(slotToShiftTo.transform, worldPositionStays:true);
-                Debug.Log(tile.transform.position);
-
-                if (slotToShiftTo.transform.childCount == 2)
-                {
-                    var oldTile = slotToShiftTo.transform.GetChild(0).gameObject;
-                    GameManager.Instance.GameTileManager.Tiles.Remove(oldTile.GetComponent<Tile>());
-                    Destroy(oldTile);
-
-                    tile.Upgrade();
-                }
-
-                Moving = false;
-            });
+            UniTask.Delay((int)(TravelTime * 1000)).ContinueWith(() => { Moving = false; });
         }
     }
 
