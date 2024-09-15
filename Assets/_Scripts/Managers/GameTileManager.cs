@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AYellowpaper.SerializedCollections;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
@@ -11,6 +12,8 @@ using Random = System.Random;
 
 public class GameTileManager : MonoBehaviour
 {
+    [SerializeField] private Wind _windSpawner;
+
     public List<Slot> Slots;
     public List<Tile> Tiles;
 
@@ -27,9 +30,8 @@ public class GameTileManager : MonoBehaviour
     public TileConfig tileConfig;
 
     public WindDirection windDirection;
-
-    private float _travelTime = .2f;
-    private bool _moving;
+    public float TravelTime = .5f;
+    [HideInInspector] public bool Moving;
 
     #region ldminh
 
@@ -56,8 +58,6 @@ public class GameTileManager : MonoBehaviour
             var slot = tile.GetComponent<Slot>();
             slot.Pos = new Pos(hieuX, hieuY);
             Slots.Add(slot);
-            
-            Debug.Log($"{slot.gameObject}: {hieuX}, {hieuY}");
 
             if (tile.transform.childCount > 0)
             {
@@ -66,9 +66,7 @@ public class GameTileManager : MonoBehaviour
                 tileDictionary.Add(tileLocation, tileComponent);
             }
         }
-
     }
-
 
     #endregion
 
@@ -83,16 +81,21 @@ public class GameTileManager : MonoBehaviour
     public void CallThunder()
     {
         var slotToZap = Slots[new Random().Next(0, Slots.Count - 1)];
-        
+
         //TODO: visual
-        
+
         Destroy(slotToZap.CurrentTile.gameObject);
     }
 
     public void ShiftByWind(Vector2Int dir)
     {
-        if(_moving) return;
-         
+        if (Moving) return;
+
+        if (dir.y == 1) _windSpawner.Down();
+        else if (dir.y == -1) _windSpawner.Up();
+        else if (dir.x == 1) _windSpawner.Right();
+        else if (dir.x == -1) _windSpawner.Left();
+
         var orderedTiles = Tiles.OrderBy(s => s.Pos.X).ThenBy(s => s.Pos.Y).ToList();
         if (dir == Vector2Int.up || dir == Vector2Int.right)
             orderedTiles.Reverse();
@@ -125,28 +128,27 @@ public class GameTileManager : MonoBehaviour
                 slotToShiftTo = possibleSlot;
                 tile.SetSlot(slotToShiftTo);
             }
-            
-            
-            
-            tile.transform.SetParent(slotToShiftTo.transform);
-            
-            if (slotToShiftTo.transform.childCount == 2)
-            {
-                var oldTile = slotToShiftTo.transform.GetChild(0).gameObject;
-                GameManager.Instance.GameTileManager.Tiles.Remove(oldTile.GetComponent<Tile>());
-                Destroy(oldTile);
-                
-                tile.Upgrade();
-            }
 
-            _moving = true;
-            tile.transform.DOMove(slotToShiftTo.transform.position, _travelTime)
-                .OnComplete(() =>
+            
+
+            Moving = true;
+            tile.transform.DOMove(slotToShiftTo.transform.position, TravelTime);
+            UniTask.Delay((int)(TravelTime * 1000)).ContinueWith(() =>
+            {
+                tile.transform.SetParent(slotToShiftTo.transform, worldPositionStays:true);
+                Debug.Log(tile.transform.position);
+
+                if (slotToShiftTo.transform.childCount == 2)
                 {
-                    _moving = false;
-                });
-            
-            
+                    var oldTile = slotToShiftTo.transform.GetChild(0).gameObject;
+                    GameManager.Instance.GameTileManager.Tiles.Remove(oldTile.GetComponent<Tile>());
+                    Destroy(oldTile);
+
+                    tile.Upgrade();
+                }
+
+                Moving = false;
+            });
         }
     }
 

@@ -86,8 +86,6 @@ public class Tile : MonoBehaviour
         ProgressBar.value = 0;
         Image.DOColor(Color.yellow, .1f).OnComplete(() => { Image.DOColor(Color.white, 0.1f); });
 
-        Debug.Log("Produce");
-
         var cost = _productCost[level];
         var rm = GameManager.Instance.ResourceManager;
         var um = GameManager.Instance.UnitManager;
