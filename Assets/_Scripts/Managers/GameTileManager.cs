@@ -67,98 +67,8 @@ public class GameTileManager : MonoBehaviour
             }
         }
 
-        // CheckForTile();
     }
 
-    public void CheckForTile()
-    {
-        foreach (var grid in gridDictionary)
-        {
-            if (grid.Value.transform.childCount > 0)
-            {
-                Tile tile = grid.Value.transform.GetChild(0).GetComponent<Tile>();
-                Vector2Int tileLocation = grid.Key;
-                if (gridTile[tileLocation.x, tileLocation.y] == null) // Check if the tile already exists
-                {
-                    gridTile[tileLocation.x, tileLocation.y] = tile;
-                }
-    
-                if (!tileDictionary.ContainsKey(tileLocation)) // Check if the tile already exists
-                {
-                    tileDictionary.Add(tileLocation, tile);
-                }
-            }
-        }
-    }
-    
-    // public void CheckAllTile()
-    // {
-    //     foreach (var g in gridDictionary.Values)
-    //     {
-    //         if (g.transform.childCount > 0)
-    //         {
-    //             Tile tile = g.transform.GetChild(0).GetComponent<Tile>();
-    //             tile.CheckSurrounding();
-    //         }
-    //     }
-    // }
-
-    public Vector2Int GetPosition(Tile tile, bool useDict)
-    {
-        switch (useDict)
-        {
-            case false:
-                for (int x = 0; x < grid.GetLength(0); x++)
-                {
-                    for (int y = 0; y < grid.GetLength(1); y++)
-                    {
-                        if (grid[x, y] == tile.gameObject)
-                        {
-                            return new Vector2Int(x, y);
-                        }
-                    }
-                }
-
-                break;
-            case true:
-                foreach (var kvp in tileDictionary)
-                {
-                    if (kvp.Value == tile)
-                    {
-                        return kvp.Key;
-                    }
-                }
-
-                break;
-        }
-
-        return new Vector2Int(-1, -1);
-    }
-
-    [Button]
-    public void GetRandomTile()
-    {
-        int x = UnityEngine.Random.Range(1, 5);
-        int y = UnityEngine.Random.Range(1, 5);
-        Vector2Int tileLocation = new(x, y);
-
-        if (gridDictionary.ContainsKey(tileLocation))
-        {
-            GameObject tile = gridDictionary[tileLocation];
-            Debug.Log("Tile at " + x + ", " + y + " is " + tile.name);
-            GameObject randomTile = grid[x, y];
-            Debug.Log("Tile at " + x + ", " + y + " Array is " + randomTile.name);
-        }
-        else
-        {
-            Debug.Log("No tile found at " + x + ", " + y);
-        }
-    }
-
-    public int GetTileDistance()
-    {
-        return -1;
-    }
 
     #endregion
 
@@ -215,32 +125,30 @@ public class GameTileManager : MonoBehaviour
                 slotToShiftTo = possibleSlot;
                 tile.SetSlot(slotToShiftTo);
             }
+            
+            
+            
+            tile.transform.SetParent(slotToShiftTo.transform);
+            
+            if (slotToShiftTo.transform.childCount == 2)
+            {
+                var oldTile = slotToShiftTo.transform.GetChild(0).gameObject;
+                GameManager.Instance.GameTileManager.Tiles.Remove(oldTile.GetComponent<Tile>());
+                Destroy(oldTile);
+                
+                tile.Upgrade();
+            }
 
             _moving = true;
             tile.transform.DOMove(slotToShiftTo.transform.position, _travelTime)
                 .OnComplete(() =>
                 {
                     _moving = false;
-                    
-                    tile.transform.SetParent(slotToShiftTo.transform);
-                    tile.transform.localPosition = Vector3.zero;
-
-                    if (slotToShiftTo.transform.childCount == 2)
-                    {
-                        var oldTile = slotToShiftTo.transform.GetChild(0).gameObject;
-                        GameManager.Instance.GameTileManager.Tiles.Remove(oldTile.GetComponent<Tile>());
-                        Destroy(oldTile);
-                
-                        tile.Upgrade();
-                    }
                 });
             
             
         }
     }
-
-    public Tile GetTileByPos(int x, int y)
-        => GetSlotByPos(x, y).CurrentTile;
 
     public Slot GetSlotByPos(int x, int y)
         => Slots.FirstOrDefault(s => s.Pos.X == x && s.Pos.Y == y);

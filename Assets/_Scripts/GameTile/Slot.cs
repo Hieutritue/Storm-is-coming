@@ -15,27 +15,28 @@ public class Slot : MonoBehaviour ,IDropHandler, IPointerEnterHandler, IPointerE
     private bool isUnderCursor = false;
     private Image _image;
 
+    public Transform Transform;
     private void Start()
     {
         _image = GetComponent<Image>();
     }
 
-    private void Update()
-    {
-        var obj = GameManager.Instance.GameTileManager.currentHoldingTile;
-        
-        if(Input.GetMouseButtonUp(0)) _image.color = new Color(1, 1, 1, 0);
-        
-        if (isUnderCursor && obj)
-        {
-            _image.sprite = obj.Image.sprite;
-            _image.color = new Color(1, 1, 1, 0.7f);
-        }
-        else
-        {
-            _image.color = new Color(1, 1, 1, 0);
-        }
-    }
+    // private void Update()
+    // {
+    //     var obj = GameManager.Instance.GameTileManager.currentHoldingTile;
+    //     
+    //     if(Input.GetMouseButtonUp(0)) _image.color = new Color(1, 1, 1, 0);
+    //     
+    //     if (isUnderCursor && obj)
+    //     {
+    //         _image.sprite = obj.Image.sprite;
+    //         _image.color = new Color(1, 1, 1, 0.7f);
+    //     }
+    //     else
+    //     {
+    //         _image.color = new Color(1, 1, 1, 0);
+    //     }
+    // }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -53,19 +54,20 @@ public class Slot : MonoBehaviour ,IDropHandler, IPointerEnterHandler, IPointerE
     public void OnDrop(PointerEventData eventData)
     {
         Tile tile = GameManager.Instance.GameTileManager.currentHoldingTile;
+        if(tile.tileType != TileType.Thunder) return;
         
         if (!tile.isTemporary)
         {
             if (transform.childCount != 0)
             {
                 var changeTile = transform.GetChild(0).GetComponent<Tile>(); ;
-    
+        
                 (changeTile.parentAfterDrag, tile.parentAfterDrag) = 
                     (tile.parentAfterDrag, changeTile.parentAfterDrag);
-    
+        
                 changeTile.transform.SetParent(changeTile.parentAfterDrag);
             }
-    
+        
             tile.parentAfterDrag = transform;
         }
         else

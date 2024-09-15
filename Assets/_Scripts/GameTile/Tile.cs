@@ -36,7 +36,7 @@ public class Tile : MonoBehaviour
     {
         Image = GetComponent<Image>();
         ProgressBar = GetComponentInChildren<Slider>();
-        if(ProgressBar) ProgressBar.value = 0;
+        if (ProgressBar) ProgressBar.value = 0;
     }
 
     public virtual bool EnoughResourceToWork()
@@ -55,13 +55,13 @@ public class Tile : MonoBehaviour
 
     private void OnDisable()
     {
-        if(!(this is GeneratorTile || this is MilitaryTile) )
+        if (!(this is GeneratorTile || this is MilitaryTile))
             GameManager.Instance.UnitManager.Houses.Remove(this);
     }
 
     private void Update()
     {
-        if (isTemporary)
+        if (isTemporary || tileType == TileType.Thunder)
         {
             return;
         }
@@ -116,7 +116,8 @@ public class Tile : MonoBehaviour
     public void SetSlot(Slot newSlot)
     {
         Pos = newSlot.Pos;
-        OccupiedSlot.CurrentTile = null;
+        if (OccupiedSlot)
+            OccupiedSlot.CurrentTile = null;
         OccupiedSlot = newSlot;
         newSlot.CurrentTile = this;
     }
@@ -139,8 +140,8 @@ public class Tile : MonoBehaviour
 
         level++;
 
-        transform.DOScale(Vector3.one * 1.2f,0.1f)
-            .OnComplete(()=>transform.DOScale(Vector3.one * 0.8f,.1f));
+        transform.DOScale(Vector3.one * 1.2f, 0.1f)
+            .OnComplete(() => transform.DOScale(Vector3.one * 0.8f, .1f));
 
         Image.sprite = _sprites[level];
     }
@@ -155,7 +156,8 @@ public enum TileType
     Gold,
     House,
     Barrack,
-    WeatherMachine
+    WeatherMachine,
+    Thunder
 }
 
 [Serializable]

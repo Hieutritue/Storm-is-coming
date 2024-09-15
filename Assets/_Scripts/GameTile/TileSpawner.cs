@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = System.Random;
 
-public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class TileSpawner : MonoBehaviour
 {
     public Tile tilePrefab;
     public Transform tileParent;
     private Tile spawnedTile;
     public TileRequirement tileRequirement;
+    [SerializeField] private Animator _explosion;
+    [SerializeField] private int _cost = 5;
 
-    private void Start(){
+    private void Start()
+    {
         // tilePrefab = gameManager.tileConfig.basicPrefab;
     }
 
@@ -22,79 +28,47 @@ public class TileSpawner : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                && tileRequirement.meat <= rm.Meat;
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void SpawnOnRandomSlot()
     {
-        spawnedTile = Instantiate(tilePrefab, eventData.position, Quaternion.identity);
-        spawnedTile.transform.SetParent(tileParent, false);
-        
-        // Set the width and height of the spawnedTile to be the same as the prefab
-        RectTransform prefabRectTransform = tilePrefab.GetComponent<RectTransform>();
-        RectTransform spawnedRectTransform = spawnedTile.GetComponent<RectTransform>();
-        spawnedRectTransform.sizeDelta = prefabRectTransform.sizeDelta;
-        
-        spawnedTile.isTemporary = true;
-        spawnedTile.ProgressBar?.gameObject.SetActive(false);
-        spawnedTile.SetRaycast();
-        GameManager.Instance.GameTileManager.currentHoldingTile = spawnedTile;
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (spawnedTile != null)
+        if (tilePrefab.tileType == TileType.Thunder)
         {
-            spawnedTile.ChangeTransparency(0.4f);
-            spawnedTile.transform.position = eventData.position;
-        }
-    }
+            var listToZap = GameManager.Instance.GameTileManager.Slots;
+            var slotToZap = listToZap[new Random().Next(0, listToZap.Count - 1)];
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        if (spawnedTile != null)
-        {
-            if (spawnedTile.GetComponent<Tile>().parentAfterDrag == null)
+            var ex = Instantiate(_explosion, slotToZap.Transform);
+            ex.transform.position = new Vector2(slotToZap.Transform.position.x, slotToZap.Transform.position.y - 3);
+            UniTask.Delay(600).ContinueWith(() => Destroy(ex.gameObject));
+            
+            if (slotToZap.CurrentTile)
             {
-                Destroy(spawnedTile.gameObject);
-                return;
+                slotToZap.CurrentTile = null;
+                Destroy(slotToZap.transform.GetChild(0).gameObject);
             }
-            
-            spawnedTile.ChangeTransparency(1);
-            
-            spawnedTile.isTemporary = false;
-            spawnedTile.SetRaycast();
-            spawnedTile.transform.SetParent(spawnedTile.parentAfterDrag);
-            spawnedTile.ProgressBar?.gameObject.SetActive(true);
-            
-            if(!(spawnedTile is GeneratorTile || spawnedTile is MilitaryTile))
-                GameManager.Instance.UnitManager.Houses.Add(spawnedTile);
-
-            var slotToDropOn = spawnedTile.parentAfterDrag.GetComponent<Slot>();
-            slotToDropOn.CurrentTile = spawnedTile;
-            spawnedTile.OccupiedSlot = slotToDropOn;
-            spawnedTile.Pos = slotToDropOn.Pos;
-            GameManager.Instance.GameTileManager.Tiles.Add(spawnedTile);
-            
-            
-            GameManager.Instance.GameTileManager.currentHoldingTile = null;
-            spawnedTile = null;
-            // GameManager.Instance.GameTileManager.CheckForTile();
-            // GameManager.Instance.GameTileManager.CheckAllTile();
+            return;
         }
+        
+        if(GameManager.Instance.ResourceManager.Wood < _cost) return;
+        
+        var list = GameManager.Instance.GameTileManager.Slots.Where(s => s.CurrentTile == null).ToList();
+        if(list.Count == 0) return;
+        var slot = list[new Random().Next(0, list.Count - 1)];
+        spawnedTile = Instantiate(tilePrefab, slot.transform);
+        spawnedTile.transform.localPosition = Vector3.zero;
+        spawnedTile.transform.localScale = Vector3.one * 0.8f;
+        
+        slot.CurrentTile = spawnedTile;
+        
+        spawnedTile.SetSlot(slot);
+        spawnedTile.ProgressBar?.gameObject.SetActive(true);
+
+        if (!(spawnedTile is GeneratorTile || spawnedTile is MilitaryTile))
+            GameManager.Instance.UnitManager.Houses.Add(spawnedTile);
+        
+        spawnedTile.Pos = slot.Pos;
+        GameManager.Instance.GameTileManager.Tiles.Add(spawnedTile);
+
+        GameManager.Instance.ResourceManager.Wood -= _cost;
     }
 
-    // public void CheckForresourceAvailability()
-    // {
-    //     var rm = GameManager.Instance.ResourceManager;
-    //
-    //     if (rm.CheckEnoughResources(tileRequirement))
-    //     {
-    //         rm.Wood -= tileRequirement.wood;
-    //         rm.Meat -= tileRequirement.meat;
-    //         rm.Iron -= tileRequirement.iron;
-    //         rm.Gold -= tileRequirement.gold;
-    //     }
-    //     else
-    //     {
-    //         Destroy(spawnedTile);
-    //     }
-    // }
+    
 }
