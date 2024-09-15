@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public class TileSpawner : MonoBehaviour
@@ -14,10 +16,26 @@ public class TileSpawner : MonoBehaviour
     public TileRequirement tileRequirement;
     [SerializeField] private Animator _explosion;
     [SerializeField] private int _cost = 5;
+    private Image _image;
 
     private void Start()
     {
+        _image = GetComponent<Image>();
         // tilePrefab = gameManager.tileConfig.basicPrefab;
+    }
+
+    private void Update()
+    {
+        if(tilePrefab.tileType == TileType.Thunder) return;
+        
+        if (GameManager.Instance.ResourceManager.Wood < _cost)
+        {
+            _image.color = Color.grey;
+        }
+        else
+        {
+            _image.color = Color.white;
+        }
     }
 
     bool MeetRequirement()
@@ -37,6 +55,9 @@ public class TileSpawner : MonoBehaviour
 
             var ex = Instantiate(_explosion, slotToZap.Transform);
             ex.transform.position = new Vector2(slotToZap.Transform.position.x, slotToZap.Transform.position.y - 3);
+            
+            GameManager.Instance.AudioManager.PlayClip(ClipName.Explosion);
+            
             UniTask.Delay(600).ContinueWith(() => Destroy(ex.gameObject));
             
             if (slotToZap.CurrentTile)

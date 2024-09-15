@@ -14,7 +14,7 @@ public class TimeLineManager : MonoBehaviour
 
     public float SecondsPerGameDay;
     [SerializeField] private float _delayOfStormEvents;
-    [SerializeField] private List<EventOfWeek> _eventWeeks;
+    [FormerlySerializedAs("_eventWeeks")] public List<EventOfWeek> EventWeeks;
 
     [SerializeField] private EnemyWaveSpawner _enemyWaveSpawner;
 
@@ -23,20 +23,20 @@ public class TimeLineManager : MonoBehaviour
 
     private void Start()
     {
-        _eventWeeks = _eventWeeks.OrderBy(e => e.Week).ToList();
+        EventWeeks = EventWeeks.OrderBy(e => e.Week).ToList();
     }
 
     private void Update()
     {
         if(_timeStopped) return;
         
-        if (!_eventWeeks.Any()) return; //TODO: win
+        if (!EventWeeks.Any()) return; //TODO: win
 
-        if (CurrentWeek == _eventWeeks[0].Week)
+        if (CurrentWeek == EventWeeks[0].Week)
         {
-            CallEnemyWave(_eventWeeks[0].EnemyWave);
+            CallEnemyWave(EventWeeks[0].EnemyWave);
 
-            _eventWeeks.RemoveAt(0);
+            EventWeeks.RemoveAt(0);
         }
 
         _timer += Time.deltaTime;
