@@ -117,22 +117,22 @@ MonoBehaviour:
     PawnCost: 0
     ArcherCost: 0
     KnightCost: 0
-  - WoodCost: 0
+  - WoodCost: 3
     MeatCost: 10
+    IronCost: 0
+    GoldCost: 7
+    PawnCost: 0
+    ArcherCost: 0
+    KnightCost: 0
+  - WoodCost: 0
+    MeatCost: 20
     IronCost: 0
     GoldCost: 10
     PawnCost: 0
     ArcherCost: 0
     KnightCost: 0
   - WoodCost: 0
-    MeatCost: 10
-    IronCost: 0
-    GoldCost: 15
-    PawnCost: 0
-    ArcherCost: 0
-    KnightCost: 0
-  - WoodCost: 0
-    MeatCost: 10
+    MeatCost: 30
     IronCost: 0
     GoldCost: 20
     PawnCost: 1

@@ -14,7 +14,7 @@ public class BaseUnit : MonoBehaviour
 
     public Transform RealPosition;
     public AllyType AllyType;
-    
+
     [SerializeField] private int _health;
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
@@ -28,9 +28,11 @@ public class BaseUnit : MonoBehaviour
 
     protected BaseUnit _target;
 
+    private float _initialScale;
     private Vector2 _initialPos;
     private float _timer = 0;
     private SpriteRenderer _spriteRenderer;
+    private Rigidbody2D _rb;
 
     public Vector2 InitialPos
     {
@@ -39,17 +41,19 @@ public class BaseUnit : MonoBehaviour
 
     private void Awake()
     {
+        _initialScale = transform.localScale.x;
         _initialPos = transform.position;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         if (_isCastle) _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private float DistanceToTarget =>
         _target != null ? Vector2.Distance(transform.position, _target.transform.position) : 100f;
 
-    private bool TargetInRange => _doesAoe ? DistanceToTarget <= 0.7f : DistanceToTarget <= _range;
+    private bool TargetInRange => _doesAoe ? DistanceToTarget <= 1f : DistanceToTarget <= _range;
 
-    private float DistanceTo(Vector2 pos) => Vector2.Distance(transform.position, pos); 
+    private float DistanceTo(Vector2 pos) => Vector2.Distance(transform.position, pos);
 
     public int Health
     {
@@ -59,15 +63,27 @@ public class BaseUnit : MonoBehaviour
             _health = value;
             if (_health <= 0)
             {
+                if (_isCastle) GameManager.Instance.Lose();
                 Die();
             }
         }
     }
 
+    private Vector2 _vector2 = Vector2.zero;
+
     private void Update()
     {
-        if(_isCastle) return;
-        
+        if (_isCastle) return;
+
+        if (_rb.velocity.magnitude > 0.01f) // Check if the velocity is significant
+        {
+            _rb.velocity = Vector2.SmoothDamp(_rb.velocity, Vector2.zero, ref _vector2, 1);
+        }
+        else
+        {
+            _rb.velocity = Vector2.zero; // Set velocity to zero to avoid floating-point issues
+        }
+
         if (_target) CheckDirection(_target.transform.position);
 
         if (_spriteRenderer)
@@ -102,6 +118,7 @@ public class BaseUnit : MonoBehaviour
             MoveToTarget(_initialPos);
             return;
         }
+
         MoveToTarget(_target.transform.position);
     }
 
@@ -109,7 +126,7 @@ public class BaseUnit : MonoBehaviour
     public void Die()
     {
         GameManager.Instance.AudioManager.PlayClip(ClipName.UnitDie);
-        
+
         if (_doesAoe) RealPosition.position += new Vector3(0, 2, 0);
         var dead = Instantiate(_dead, RealPosition);
         dead.transform.SetParent(transform.parent);
@@ -120,7 +137,7 @@ public class BaseUnit : MonoBehaviour
     private void Explode()
     {
         GameManager.Instance.AudioManager.PlayClip(ClipName.Explosion);
-        
+
         var ex = Instantiate(_explosion, RealPosition);
         ex.transform.SetParent(transform.parent);
         UniTask.Delay(900).ContinueWith(() => Destroy(ex.gameObject));
@@ -136,28 +153,33 @@ public class BaseUnit : MonoBehaviour
 
     public void DealDamage()
     {
-        if(!TargetInRange) return;
-        
+        if (!TargetInRange && !_doesAoe) return;
+
         GameManager.Instance.AudioManager.PlayClip(ClipName.UnitHit);
-        
+
         if (_doesAoe)
         {
-            var targetUnits =
-                IsAlly
-                    ? GameManager.Instance.UnitManager.AllEnemies
-                    : GameManager.Instance.UnitManager.AllAllies;
+            var targetUnits = GameManager.Instance.UnitManager.AllUnits;
             targetUnits
                 .Where(t => DistanceTo(t.transform.position) < _range)
                 .ToList()
                 .ForEach(t =>
                 {
                     t.TakeDamage(_damage);
+                    if (!t.CompareTag("Tower")) t.Push(4 *(t.transform.position - this.transform.position).normalized);
                 });
             Explode();
             return;
         }
-        
+
         _target?.TakeDamage(_damage);
+    }
+
+    public void Push(Vector2 dir)
+    {
+        Debug.Log($"Pushed: {dir}");
+        _rb.AddForce(dir, ForceMode2D.Impulse);
+        // DOTween.To(() => rb.velocity, x => rb.velocity = x, Vector2.zero, 1);
     }
 
     public void TakeDamage(int damage)
@@ -182,7 +204,8 @@ public class BaseUnit : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Instance.UnitManager.AllUnits.Add(this);
+        if (!CompareTag("Player"))
+            GameManager.Instance.UnitManager.AllUnits.Add(this);
     }
 
     private void OnDisable()
@@ -193,10 +216,10 @@ public class BaseUnit : MonoBehaviour
     private void CheckDirection(Vector2 target)
     {
         if (target.x > transform.position.x)
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(_initialScale, _initialScale, _initialScale);
         else
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-_initialScale, _initialScale, _initialScale);
         }
     }
 

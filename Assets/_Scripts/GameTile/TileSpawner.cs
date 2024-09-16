@@ -16,7 +16,11 @@ public class TileSpawner : MonoBehaviour
     public TileRequirement tileRequirement;
     [SerializeField] private Animator _explosion;
     [SerializeField] private int _cost = 5;
+    [SerializeField] private UIData _uiData;
+    [SerializeField] private string _description;
+    
     private Image _image;
+    
 
     private void Start()
     {
@@ -36,6 +40,16 @@ public class TileSpawner : MonoBehaviour
         }
     }
 
+    public void OnMouseEnter()
+    {
+        _uiData.SetInfo(_description);
+    }
+
+    private void OnMouseExit()
+    {
+        _uiData.SetInfo("");
+    }
+
     bool MeetRequirement()
     {
         var rm = GameManager.Instance.ResourceManager;
@@ -46,7 +60,11 @@ public class TileSpawner : MonoBehaviour
 
     public void SpawnOnRandomSlot()
     {
-        if (GameManager.Instance.GameTileManager.Moving || GameManager.Instance.ResourceManager.Wood < _cost) return;
+        if (GameManager.Instance.GameTileManager.Moving || GameManager.Instance.ResourceManager.Wood < _cost)
+        {
+            GameManager.Instance.AudioManager.PlayClip(ClipName.NotEnough);
+            return;
+        }
 
         if (tilePrefab.tileType == TileType.Thunder)
         {
@@ -72,6 +90,9 @@ public class TileSpawner : MonoBehaviour
 
         var list = GameManager.Instance.GameTileManager.Slots.Where(s => s.CurrentTile == null).ToList();
         if (list.Count == 0) return;
+        
+        GameManager.Instance.AudioManager.PlayClip(ClipName.Build);
+        
         var slot = list[new Random().Next(0, list.Count - 1)];
         spawnedTile = Instantiate(tilePrefab, slot.transform);
         spawnedTile.transform.localPosition = Vector3.zero;

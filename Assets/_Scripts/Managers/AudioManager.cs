@@ -22,4 +22,10 @@ public enum ClipName
     UnitHit,
     UnitDie, 
     Explosion,
+    Trumpet,
+    Wind,
+    Merge,
+    Spawn,
+    Build,
+    NotEnough
 }

@@ -12,13 +12,15 @@ public class EnemyWaveSpawner : MonoBehaviour
     [Button]
     public void TestSpawnWave()
     {
-        if(!_enemyWave) return;
+        GameManager.Instance.AudioManager.PlayClip(ClipName.Trumpet);
+        if (!_enemyWave) return;
         var _spawnedWave = Instantiate(_enemyWave, transform);
     }
 
     public void SpawnWave(EnemyWave enemyWave)
     {
-        if(!enemyWave) return;
+        GameManager.Instance.AudioManager.PlayClip(ClipName.Trumpet);
+        if (!enemyWave) return;
         Instantiate(enemyWave, transform);
     }
 }

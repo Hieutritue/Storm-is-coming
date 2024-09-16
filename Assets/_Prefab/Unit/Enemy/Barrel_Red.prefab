@@ -143,10 +143,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsAlly: 0
   RealPosition: {fileID: 8957182038710572292}
+  AllyType: 0
   _health: 100
-  _speed: 3
+  _speed: 1.5
   _damage: 50
-  _range: 1.5
+  _range: 2
   _attackCooldown: 4
   _doesAoe: 1
   _explosion: {fileID: 640072873340016940, guid: 5dcde032395bf4a4298f124bbdb6c593, type: 3}

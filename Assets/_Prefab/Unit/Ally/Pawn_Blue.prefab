@@ -226,15 +226,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsAlly: 1
   RealPosition: {fileID: 3484210832893536400}
+  AllyType: 0
   _health: 100
-  _speed: 1
+  _speed: 0.75
   _damage: 15
-  _range: 0.6
+  _range: 0.8
   _attackCooldown: 3
   _doesAoe: 0
   _explosion: {fileID: 0}
   _animController: {fileID: 3489464343802074096}
   _dead: {fileID: 1866738995743552115, guid: 8af6a010d8968af4989283cf0b5bf7a2, type: 3}
+  _isCastle: 0
 --- !u!50 &-535269817596879684
 Rigidbody2D:
   serializedVersion: 4

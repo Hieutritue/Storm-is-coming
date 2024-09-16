@@ -29,8 +29,15 @@ public class TimeLineManager : MonoBehaviour
     private void Update()
     {
         if(_timeStopped) return;
-        
-        if (!EventWeeks.Any()) return; //TODO: win
+
+        if (!EventWeeks.Any())
+        {
+            if (_enemyWaveSpawner.transform.childCount == 0)
+            {
+                GameManager.Instance.Win();
+            }
+            return;
+        }
 
         if (CurrentWeek == EventWeeks[0].Week)
         {

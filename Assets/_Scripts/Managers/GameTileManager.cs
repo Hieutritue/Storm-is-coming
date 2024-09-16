@@ -72,10 +72,10 @@ public class GameTileManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) ShiftByWind(new Vector2Int(-1, 0));
-        if (Input.GetKeyDown(KeyCode.RightArrow)) ShiftByWind(new Vector2Int(1, 0));
-        if (Input.GetKeyDown(KeyCode.UpArrow)) ShiftByWind(new Vector2Int(0, -1));
-        if (Input.GetKeyDown(KeyCode.DownArrow)) ShiftByWind(new Vector2Int(0, 1));
+        if (Input.GetKeyDown(KeyCode.A)) ShiftByWind(new Vector2Int(-1, 0));
+        if (Input.GetKeyDown(KeyCode.D)) ShiftByWind(new Vector2Int(1, 0));
+        if (Input.GetKeyDown(KeyCode.W)) ShiftByWind(new Vector2Int(0, -1));
+        if (Input.GetKeyDown(KeyCode.S)) ShiftByWind(new Vector2Int(0, 1));
     }
 
     public void CallThunder()
@@ -91,10 +91,37 @@ public class GameTileManager : MonoBehaviour
     {
         if (Moving) return;
 
-        if (dir.y == 1) _windSpawner.Down();
-        else if (dir.y == -1) _windSpawner.Up();
-        else if (dir.x == 1) _windSpawner.Right();
-        else if (dir.x == -1) _windSpawner.Left();
+        if (GameManager.Instance.ResourceManager.Gold < 2)
+        {
+            GameManager.Instance.AudioManager.PlayClip(ClipName.NotEnough);
+            return;
+        }
+        GameManager.Instance.ResourceManager.Gold -= 2;
+
+        GameManager.Instance.AudioManager.PlayClip(ClipName.Wind);
+
+        var list = GameManager.Instance.UnitManager.AllUnits.Where(u => !u.CompareTag("Tower")).ToList();
+
+        if (dir.y == 1)
+        {
+            list.ForEach(t => t.Push(Vector2.down * 2));
+            _windSpawner.Down();
+        }
+        else if (dir.y == -1)
+        {
+            list.ForEach(t => t.Push(Vector2.up * 2));
+            _windSpawner.Up();
+        }
+        else if (dir.x == 1)
+        {
+            list.ForEach(t => t.Push(Vector2.right * 2));
+            _windSpawner.Right();
+        }
+        else if (dir.x == -1)
+        {
+            list.ForEach(t => t.Push(Vector2.left * 2));
+            _windSpawner.Left();
+        }
 
         var orderedTiles = Tiles.OrderBy(s => s.Pos.X).ThenBy(s => s.Pos.Y).ToList();
         if (dir == Vector2Int.up || dir == Vector2Int.right)
@@ -130,7 +157,7 @@ public class GameTileManager : MonoBehaviour
             }
 
             // tile.gameObject.SetActive(false);
-            
+
             tile.transform.SetParent(slotToShiftTo.transform, worldPositionStays: true);
 
             if (slotToShiftTo.transform.childCount == 2)
@@ -140,6 +167,7 @@ public class GameTileManager : MonoBehaviour
                 Destroy(oldTile);
 
                 tile.Upgrade();
+                GameManager.Instance.AudioManager.PlayClip(ClipName.Merge);
             }
 
             Moving = true;

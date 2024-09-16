@@ -9,16 +9,18 @@ using Random = System.Random;
 public class AllySpawner : MonoBehaviour
 {
     [SerializeField] private List<BaseUnit> _units;
-    
+
     public AllyType TestAllyType;
 
     private float _spawnOffset = 2;
-    
+
     [Button]
     public void TestSpawn()
     {
+        GameManager.Instance.AudioManager.PlayClip(ClipName.Spawn);
+
         Random random = new Random();
-        var xrNumber = random.NextDouble() * _spawnOffset/2 + 1f;
+        var xrNumber = random.NextDouble() * _spawnOffset / 2 + 1f;
         var yrNumber = random.NextDouble() * _spawnOffset;
         var spawnedUnit = Instantiate(_units[(int)TestAllyType], transform);
 
@@ -30,6 +32,8 @@ public class AllySpawner : MonoBehaviour
 
     public void Spawn(AllyType allyType)
     {
+        GameManager.Instance.AudioManager.PlayClip(ClipName.Spawn);
+
         Random random = new Random();
         var xrNumber = random.NextDouble() * _spawnOffset;
         var yrNumber = random.NextDouble() * _spawnOffset;
