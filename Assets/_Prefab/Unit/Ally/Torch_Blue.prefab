@@ -219,7 +219,7 @@ MonoBehaviour:
   RealPosition: {fileID: 5019350894493595757}
   AllyType: 3
   _health: 600
-  _speed: 0.75
+  _speed: 0.5
   _damage: 50
   _range: 1.5
   _attackCooldown: 1.5

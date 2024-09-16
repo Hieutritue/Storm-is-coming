@@ -80,6 +80,7 @@ public class TileSpawner : MonoBehaviour
 
             if (slotToZap.CurrentTile)
             {
+                GameManager.Instance.GameTileManager.Tiles.Remove(slotToZap.CurrentTile);
                 slotToZap.CurrentTile = null;
                 Destroy(slotToZap.transform.GetChild(0).gameObject);
             }
