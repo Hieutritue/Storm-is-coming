@@ -190,7 +190,7 @@ MonoBehaviour:
   AllyType: 0
   _health: 3000
   _speed: 0.4
-  _damage: 75
+  _damage: 150
   _range: 1
   _attackCooldown: 0.5
   _doesAoe: 0

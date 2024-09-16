@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3942810572677529809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2728065624124109717}
+  - component: {fileID: 4182117582229015952}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2728065624124109717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3942810572677529809}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2359187053369561976}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4182117582229015952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3942810572677529809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792a4286dec2b0345b850d1fdd1c7c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceTexts:
+    _serializedList: []
+  troopTexts: []
 --- !u!1 &5778383236205541725
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,6 +92,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllUnits: []
+  AllySpawner: {fileID: 0}
+  Houses: []
 --- !u!1 &7230174628533022345
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3871830334104647712
 Transform:
   m_ObjectHideFlags: 0
@@ -91,14 +140,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentWeek: 1
   CurrentDay: 1
-  _secondsPerGameDay: 1
-  _eventWeeks:
-  - Week: 2
-    Storm: 
-    EnemyWave: {fileID: 2091971527854211586, guid: 298b3384bf05eb54c873a2bd4c8c6ecc, type: 3}
-  - Week: 5
-    Storm: 
-    EnemyWave: {fileID: 2091971527854211586, guid: 298b3384bf05eb54c873a2bd4c8c6ecc, type: 3}
+  SecondsPerGameDay: 3
+  _delayOfStormEvents: 0.5
+  EventWeeks:
+  - Week: 4
+    EnemyWave: {fileID: 2091971527854211586, guid: 398fea424d50e5f41990eac104a5aedd, type: 3}
+  - Week: 9
+    EnemyWave: {fileID: 2091971527854211586, guid: e723b6b974e12e041899e00d17f70876, type: 3}
+  - Week: 14
+    EnemyWave: {fileID: 2091971527854211586, guid: a876b565b0f0f3b4884bc6f66409e8a9, type: 3}
+  - Week: 18
+    EnemyWave: {fileID: 2091971527854211586, guid: 3b67f49fcaf5abb419fa923cd10bbfbe, type: 3}
+  - Week: 22
+    EnemyWave: {fileID: 2091971527854211586, guid: 727dffd3e9704594b93d95c78666da8a, type: 3}
+  - Week: 29
+    EnemyWave: {fileID: 2091971527854211586, guid: 373cf2ac3d4faed43adc17d04e2cbc10, type: 3}
+  - Week: 33
+    EnemyWave: {fileID: 2091971527854211586, guid: ffedb25fb17c9604abd206739f25445f, type: 3}
+  - Week: 36
+    EnemyWave: {fileID: 2091971527854211586, guid: b6537b000fce359498fb4d3c541654af, type: 3}
+  - Week: 38
+    EnemyWave: {fileID: 2091971527854211586, guid: 64ee5ef779440364d92de98f4b95fda0, type: 3}
+  - Week: 42
+    EnemyWave: {fileID: 2091971527854211586, guid: 2b05176afbf7d974dad7b126525985b7, type: 3}
+  - Week: 46
+    EnemyWave: {fileID: 2091971527854211586, guid: a3cfbc9ab1a8f58479449d1d0d0d5972, type: 3}
+  - Week: 50
+    EnemyWave: {fileID: 2091971527854211586, guid: 53318ba42fb869e4dbd16c0388b7b1bf, type: 3}
   _enemyWaveSpawner: {fileID: 0}
 --- !u!1 &7703718608915151449
 GameObject:
@@ -134,6 +202,7 @@ Transform:
   - {fileID: 3871830334104647712}
   - {fileID: 4003335785838466856}
   - {fileID: 8636017706027780927}
+  - {fileID: 2728065624124109717}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &25384872111565768
@@ -151,6 +220,9 @@ MonoBehaviour:
   UnitManager: {fileID: 4012675993352713399}
   AudioManager: {fileID: 3562265338570098871}
   ResourceManager: {fileID: 8982009609416644378}
+  UIManager: {fileID: 4182117582229015952}
+  GameTileManager: {fileID: 0}
+  TimeLineManager: {fileID: 2272214331846612859}
   _cursorTexture: {fileID: 2800000, guid: 165a65464593ce741bc832970ea6c18c, type: 3}
 --- !u!1 &8801129531137685166
 GameObject:
@@ -249,6 +321,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 465d05cf6c8d8884d86b96ecb6d07df6, type: 3}
   - {fileID: 8300000, guid: 83875d99f81b59a4b90437b081a69a87, type: 3}
   - {fileID: 8300000, guid: ff648e9a997bfa642bfc528b2c0f95d4, type: 3}
+  - {fileID: 8300000, guid: bb35c7369e52fd74e8a25dd64e051a31, type: 3}
+  - {fileID: 8300000, guid: 8a1f39d0dc1a5954ba0a2de5804cdfb5, type: 3}
+  - {fileID: 8300000, guid: abd54f124039d1749a493c0d4585c191, type: 3}
+  - {fileID: 8300000, guid: a50ec74e55936db47896189744d3439f, type: 3}
+  - {fileID: 8300000, guid: de3402f7cad71d7438031da05df3415f, type: 3}
+  - {fileID: 8300000, guid: cda0b65dbcab01e49bea8a56b45178af, type: 3}
   _audioSource: {fileID: 7476462953473710902}
 --- !u!82 &7476462953473710902
 AudioSource:
