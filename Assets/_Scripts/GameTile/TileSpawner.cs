@@ -84,6 +84,8 @@ public class TileSpawner : MonoBehaviour
                 slotToZap.CurrentTile = null;
                 Destroy(slotToZap.transform.GetChild(0).gameObject);
             }
+            
+            GameManager.Instance.ResourceManager.Wood -= _cost;
 
             return;
         }

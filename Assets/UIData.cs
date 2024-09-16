@@ -28,19 +28,19 @@ public class UIData : MonoBehaviour
 
     public void Forest()
     {
-        SetInfo("Forest:\n- Cost 5 wood to build\n- Produce wood for building\n- Increase production when level up");
+        SetInfo("Forest:\n- Cost 5 wood to build\n- Produce wood for building\n- Increase production when level up\n- Max level: 3");
     }
     public void Sheep()
     {
-        SetInfo("Sheep Farm:\n- Cost 5 wood to build\n- Produce meat for giving birth :v\n- Increase production when level up");
+        SetInfo("Sheep Farm:\n- Cost 5 wood to build\n- Produce meat for giving birth :v\n- Increase production when level up\n- Max level: 3");
     }
     public void Gold()
     {
-        SetInfo("Gold Mine:\n- Cost 5 wood to build\n- Produce gold for buying goods\n- Increase production when level up");
+        SetInfo("Gold Mine:\n- Cost 5 wood to build\n- Produce gold for buying goods\n- Increase production when level up\n- Max level: 3");
     }
     public void House()
     {
-        SetInfo("House:\n- Cost 5 wood to build\n- Increase army capacity\n(Your troops can't be born if reached max capacity)");
+        SetInfo("House:\n- Cost 5 wood to build\n- Increase army capacity\n- Max level: 3\n(Your troops can't be born if reached max capacity)");
     }
     public void Barrack()
     {

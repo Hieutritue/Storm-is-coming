@@ -6,7 +6,7 @@ public class MilitaryTile : Tile
     public override void Produce()
     {
         base.Produce();
-        
+        Debug.Log(level);
         GameManager.Instance.UnitManager.AllySpawner.Spawn((AllyType)level);
     }
 

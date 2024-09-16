@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6225239334592175700}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.554, z: 0}
+  m_LocalPosition: {x: 0, y: 0.811, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -105,10 +105,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch_Blue
       objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: 61f082f60cf9ec44b936b44f3036e8a6, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 1160356261127867848, guid: 61f082f60cf9ec44b936b44f3036e8a6, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 5462867758edafc45912de3b1913f0fb, type: 2}
+      objectReference: {fileID: 9100000, guid: 0b5e85bde7786f44e9abc001db3f3041, type: 2}
     - target: {fileID: 3626916397498700004, guid: 61f082f60cf9ec44b936b44f3036e8a6, type: 3}
       propertyPath: m_SortingLayer
       value: 1

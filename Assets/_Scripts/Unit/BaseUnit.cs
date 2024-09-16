@@ -93,17 +93,36 @@ public class BaseUnit : MonoBehaviour
         }
 
         FindClosestTarget();
-        if (TargetInRange)
-        {
-            _timer += Time.deltaTime;
-            if (_timer >= _attackCooldown)
+        // if (CompareTag("Boss"))
+        // {
+        //     var distanceOfBoss =
+        //         _target ? Vector2.Distance(RealPosition.position, _target.RealPosition.position) : 100f;
+        //     if (distanceOfBoss < _range)
+        //     {
+        //         _timer += Time.deltaTime;
+        //         if (_timer >= _attackCooldown)
+        //         {
+        //             Attack();
+        //             _timer = 0;
+        //         }
+        //
+        //         return;
+        //     }
+        // }
+        // else
+        // {
+            if (TargetInRange)
             {
-                Attack();
-                _timer = 0;
-            }
+                _timer += Time.deltaTime;
+                if (_timer >= _attackCooldown)
+                {
+                    Attack();
+                    _timer = 0;
+                }
 
-            return;
-        }
+                return;
+            }
+        // }
 
         if (!_target)
         {
@@ -153,7 +172,7 @@ public class BaseUnit : MonoBehaviour
 
     public void DealDamage()
     {
-        if (!TargetInRange && !_doesAoe) return;
+        if (!TargetInRange && !_doesAoe/* && !CompareTag("Boss")*/) return;
 
         GameManager.Instance.AudioManager.PlayClip(ClipName.UnitHit);
 
@@ -166,7 +185,7 @@ public class BaseUnit : MonoBehaviour
                 .ForEach(t =>
                 {
                     t.TakeDamage(_damage);
-                    if (!t.CompareTag("Tower")) t.Push(4 *(t.transform.position - this.transform.position).normalized);
+                    if (!t.CompareTag("Tower")) t.Push(4 * (t.transform.position - this.transform.position).normalized);
                 });
             Explode();
             return;

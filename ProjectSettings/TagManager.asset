@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Unit
   - Tower
+  - Boss
   layers:
   - Default
   - TransparentFX

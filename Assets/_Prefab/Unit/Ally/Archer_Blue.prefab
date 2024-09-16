@@ -226,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsAlly: 1
   RealPosition: {fileID: 8553482551646833038}
-  AllyType: 0
+  AllyType: 1
   _health: 100
   _speed: 1
   _damage: 10
