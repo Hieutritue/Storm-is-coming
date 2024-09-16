@@ -12,6 +12,6 @@ public class MilitaryTile : Tile
 
     public override bool EnoughResourceToWork()
     {
-        return base.EnoughResourceToWork() && !GameManager.Instance.UnitManager.ReachedMaxCapacity;
+        return base.EnoughResourceToWork() && (!GameManager.Instance.UnitManager.ReachedMaxCapacity || level == 3) ;
     }
 }

@@ -40,7 +40,7 @@ public class UIData : MonoBehaviour
     }
     public void House()
     {
-        SetInfo("House:\n- Cost 5 wood to build\n- Increase army capacity\n- Max level: 3\n(Your troops can't be born if reached max capacity)");
+        SetInfo("House:\n- Cost 5 wood to build\n- Increase army capacity\n- Max level: 4\n(Your troops can't be born if reached max capacity)");
     }
     public void Barrack()
     {
