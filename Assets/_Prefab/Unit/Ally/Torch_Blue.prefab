@@ -222,11 +222,11 @@ MonoBehaviour:
   IsAlly: 1
   RealPosition: {fileID: 5019350894493595757}
   AllyType: 3
-  _health: 600
+  _health: 850
   _speed: 0.5
-  _damage: 50
+  _damage: 75
   _range: 1.5
-  _attackCooldown: 1.5
+  _attackCooldown: 0.5
   _doesAoe: 0
   _explosion: {fileID: 0}
   _animController: {fileID: 6471598820489974698}

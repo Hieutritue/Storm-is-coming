@@ -26,11 +26,12 @@ public class TileSpawner : MonoBehaviour
     {
         _image = GetComponent<Image>();
         // tilePrefab = gameManager.tileConfig.basicPrefab;
+        
     }
 
     private void Update()
     {
-        if (GameManager.Instance.ResourceManager.Wood < _cost || GameManager.Instance.GameTileManager.Moving)
+        if (GameManager.Instance.ResourceManager.Wood < _cost || GameManager.Instance.GameTileManager.Moving || (!GameManager.Instance.GameStarted && tilePrefab.tileType != TileType.Wood))
         {
             _image.color = Color.grey;
         }
@@ -60,10 +61,16 @@ public class TileSpawner : MonoBehaviour
 
     public void SpawnOnRandomSlot()
     {
-        if (GameManager.Instance.GameTileManager.Moving || GameManager.Instance.ResourceManager.Wood < _cost)
+        if (GameManager.Instance.GameTileManager.Moving || GameManager.Instance.ResourceManager.Wood < _cost || (!GameManager.Instance.GameStarted && tilePrefab.tileType != TileType.Wood))
         {
             GameManager.Instance.AudioManager.PlayClip(ClipName.NotEnough);
             return;
+        }
+
+        if (!GameManager.Instance.GameStarted)
+        {
+            Time.timeScale = 1;
+            GameManager.Instance.GameStarted = true;
         }
 
         if (tilePrefab.tileType == TileType.Thunder)

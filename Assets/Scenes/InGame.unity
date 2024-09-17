@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -650,7 +650,9 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Press the buttons in the bottom left corner to build
+              houses, if you don't have any lumber yard, you can't generate wood
+              for building and lose!
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!224 &72547664 stripped
@@ -837,8 +839,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281413675
-  m_fontColor: {r: 0.16957633, g: 0.18884505, b: 0.19245279, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -861,7 +863,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 32
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1072,8 +1074,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281413675
-  m_fontColor: {r: 0.16957633, g: 0.18884505, b: 0.19245279, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1096,7 +1098,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5226,7 +5228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5349,7 +5351,9 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Press the buttons in the bottom left corner to build
+              houses, if you don't have any lumber yard, you can't generate wood
+              for building and lose!
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &676596549
@@ -6755,7 +6759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6878,7 +6882,9 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Press the buttons in the bottom left corner to build
+              houses, if you don't have any lumber yard, you can't generate wood
+              for building and lose!
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!224 &917254094 stripped
@@ -10549,7 +10555,9 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Press the buttons in the bottom left corner to build
+              houses, if you don't have any lumber yard, you can't generate wood
+              for building and lose!
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!4 &1392546443 stripped
@@ -12046,7 +12054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12169,7 +12177,9 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Press the buttons in the bottom left corner to build
+              houses, if you don't have any lumber yard, you can't generate wood
+              for building and lose!
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1001 &1633099467
@@ -13281,7 +13291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13348,7 +13358,9 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Press the buttons in the bottom left corner to build
+              houses, if you don't have any lumber yard, you can't generate wood
+              for building and lose!
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1001 &1745625783
@@ -14566,7 +14578,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Press the buttons in the bottom left corner to build houses, if you don't
+    have any lumber yard, you can't generate wood for building and lose!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14575,8 +14588,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281413675
-  m_fontColor: {r: 0.16957633, g: 0.18884505, b: 0.19245279, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14599,7 +14612,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -15996,7 +16009,7 @@ PrefabInstance:
       objectReference: {fileID: 1962350430}
     - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
       propertyPath: SecondsPerGameDay
-      value: 2
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
       propertyPath: _enemyWaveSpawner
@@ -16004,14 +16017,102 @@ PrefabInstance:
       objectReference: {fileID: 1721943466}
     - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
       propertyPath: EventWeeks.Array.size
-      value: 12
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[2].Week
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[3].Week
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[4].Week
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[5].Week
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[6].Week
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[7].Week
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[8].Week
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[9].Week
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[10].Week
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[11].Week
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
       propertyPath: EventWeeks.Array.data[12].Week
-      value: 55
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[13].Week
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[2].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: 3ecea126d1892434faec6175673da441, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[3].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: a876b565b0f0f3b4884bc6f66409e8a9, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[4].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: 3b67f49fcaf5abb419fa923cd10bbfbe, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[5].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: 727dffd3e9704594b93d95c78666da8a, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[6].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: b8e8c94c84acd9f4ab099b65b6af60fc, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[7].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: 373cf2ac3d4faed43adc17d04e2cbc10, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[8].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: ffedb25fb17c9604abd206739f25445f, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[9].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: b6537b000fce359498fb4d3c541654af, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[10].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: 64ee5ef779440364d92de98f4b95fda0, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[11].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: 2b05176afbf7d974dad7b126525985b7, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
       propertyPath: EventWeeks.Array.data[12].EnemyWave
+      value: 
+      objectReference: {fileID: 2091971527854211586, guid: a3cfbc9ab1a8f58479449d1d0d0d5972, type: 3}
+    - target: {fileID: 2272214331846612859, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: EventWeeks.Array.data[13].EnemyWave
       value: 
       objectReference: {fileID: 2091971527854211586, guid: 53318ba42fb869e4dbd16c0388b7b1bf, type: 3}
     - target: {fileID: 2359187053369561976, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
@@ -16054,6 +16155,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3562265338570098871, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: _audioClips.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562265338570098871, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: _audioClips.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: b0c482972a848554292e6c23edf07ef6, type: 3}
     - target: {fileID: 4012675993352713399, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
       propertyPath: AllySpawner
       value: 
@@ -16086,6 +16195,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -3.95
       objectReference: {fileID: 0}
+    - target: {fileID: 47184340886581056, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -543.85
+      objectReference: {fileID: 0}
     - target: {fileID: 100031741833054728, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.65
@@ -16094,6 +16207,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.42
       objectReference: {fileID: 0}
+    - target: {fileID: 194814682150285414, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1136634592089265235, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.55
@@ -16101,6 +16218,10 @@ PrefabInstance:
     - target: {fileID: 1136634592089265235, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778901936464461333, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3320209346194506700, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16150,12 +16271,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameMap
       objectReference: {fileID: 0}
+    - target: {fileID: 6909614728931440011, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_text
+      value: you can use WASD to call wind with the cost of 2 gold to shift house
+        and enemies!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_fontSize
+      value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9071107842806364243, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.36
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 6937193342355945760, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+    - {fileID: 5718720653283171964, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 6909614728931440011, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3466669642781629838, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       insertIndex: -1

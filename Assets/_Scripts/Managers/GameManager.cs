@@ -16,12 +16,16 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
+    public bool GameStarted = false;
+
 
     private void Awake()
     {
         if (Instance != null) Destroy(Instance);
         Instance = this;
 
+        Time.timeScale = 0;
+        
         //Cursor.SetCursor(_cursorTexture,Vector2.zero, CursorMode.Auto);
     }
 
