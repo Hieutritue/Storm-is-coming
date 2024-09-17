@@ -1013,7 +1013,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click on buttons to build
+  m_text: Storm is your fren
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6a275d089868c7488c25af2f75f5e96, type: 2}
   m_sharedMaterial: {fileID: -3251113655729772746, guid: b6a275d089868c7488c25af2f75f5e96, type: 2}
@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WASD to call wind with the cost of 2 gold
+  m_text: Use it calmly to save your real estate
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6a275d089868c7488c25af2f75f5e96, type: 2}
   m_sharedMaterial: {fileID: -3251113655729772746, guid: b6a275d089868c7488c25af2f75f5e96, type: 2}

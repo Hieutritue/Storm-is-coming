@@ -514,6 +514,7 @@ MonoBehaviour:
   _cost: 5
   _uiData: {fileID: 1507485079}
   _description: 
+  _tutorial: {fileID: 0}
 --- !u!114 &66991944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4586,6 +4587,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4089cd7c43a1054bb6c04b9adf0b415, type: 3}
+--- !u!114 &573429537 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+  m_PrefabInstance: {fileID: 3136349519971550034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &594354326 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4427838837270971804, guid: e4089cd7c43a1054bb6c04b9adf0b415, type: 3}
@@ -5215,6 +5227,7 @@ MonoBehaviour:
   _cost: 5
   _uiData: {fileID: 1507485079}
   _description: 
+  _tutorial: {fileID: 0}
 --- !u!114 &674924071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6208,6 +6221,7 @@ MonoBehaviour:
   windDirection: 0
   TravelTime: 0.2
   Moving: 0
+  _text: {fileID: 2106602058}
 --- !u!114 &867619531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6746,6 +6760,7 @@ MonoBehaviour:
   _cost: 5
   _uiData: {fileID: 1507485079}
   _description: 
+  _tutorial: {fileID: 0}
 --- !u!114 &916809597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10419,6 +10434,7 @@ MonoBehaviour:
   _cost: 5
   _uiData: {fileID: 1507485079}
   _description: gfdagfdsgfds
+  _tutorial: {fileID: 573429537}
 --- !u!114 &1391449462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12041,6 +12057,7 @@ MonoBehaviour:
   _cost: 5
   _uiData: {fileID: 1507485079}
   _description: 
+  _tutorial: {fileID: 0}
 --- !u!114 &1624135688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13278,6 +13295,7 @@ MonoBehaviour:
   _cost: 5
   _uiData: {fileID: 1507485079}
   _description: 
+  _tutorial: {fileID: 0}
 --- !u!114 &1741638854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14578,8 +14596,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press the buttons in the bottom left corner to build houses, if you don't
-    have any lumber yard, you can't generate wood for building and lose!
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15864,6 +15881,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4089cd7c43a1054bb6c04b9adf0b415, type: 3}
+--- !u!1 &2106602058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5294498096673545154, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+  m_PrefabInstance: {fileID: 3136349519971550034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2113989909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8719678438344045706, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
@@ -16175,6 +16197,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8982009609416644378, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: Gold
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982009609416644378, guid: 75cefd54da9bd38418aa2e986e06a482, type: 3}
+      propertyPath: Wood
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -16196,8 +16226,20 @@ PrefabInstance:
       value: -3.95
       objectReference: {fileID: 0}
     - target: {fileID: 47184340886581056, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 7.7725
+      objectReference: {fileID: 0}
+    - target: {fileID: 47184340886581056, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 4.4563
+      objectReference: {fileID: 0}
+    - target: {fileID: 47184340886581056, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -962.5795
+      objectReference: {fileID: 0}
+    - target: {fileID: 47184340886581056, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -543.85
+      value: -541.1517
       objectReference: {fileID: 0}
     - target: {fileID: 100031741833054728, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16218,6 +16260,10 @@ PrefabInstance:
     - target: {fileID: 1136634592089265235, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1299861369131165867, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.03
       objectReference: {fileID: 0}
     - target: {fileID: 1778901936464461333, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -16263,9 +16309,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4046294512843775577, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.7402496
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046294512843775577, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 9.684
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046294512843775577, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046294512843775577, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.85
+      objectReference: {fileID: 0}
     - target: {fileID: 5286433974436262738, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: AllyType
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294498096673545154, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5571542458231201555, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_Name
@@ -16277,12 +16343,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_text
-      value: you can use WASD to call wind with the cost of 2 gold to shift house
-        and enemies!
+      value: 'Press the buttons in the bottom left corner to build houses! Hover
+        on the buttons to see each house details:vvvvvvv
+
+        Now try build 2
+        lumber yards!'
       objectReference: {fileID: 0}
     - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_fontSize
-      value: 0.34
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_fontStyle
@@ -16290,7 +16359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_fontSizeBase
-      value: 0.34
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 8498350575735651907, guid: 03fbd0aad853d2c42adfc73d8579d001, type: 3}
       propertyPath: m_VerticalAlignment
@@ -16420,5 +16489,5 @@ SceneRoots:
   - {fileID: 1468094962}
   - {fileID: 1601478382}
   - {fileID: 1436281115466165292}
-  - {fileID: 3136349519971550034}
   - {fileID: 1507485078}
+  - {fileID: 3136349519971550034}

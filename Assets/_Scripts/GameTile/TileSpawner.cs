@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,7 +21,9 @@ public class TileSpawner : MonoBehaviour
     [SerializeField] private string _description;
     
     private Image _image;
-    
+    private int _heheheh;
+    [SerializeField] private TMP_Text _tutorial;
+
 
     private void Start()
     {
@@ -69,8 +72,14 @@ public class TileSpawner : MonoBehaviour
 
         if (!GameManager.Instance.GameStarted)
         {
-            Time.timeScale = 1;
-            GameManager.Instance.GameStarted = true;
+            _heheheh++;
+            if (_heheheh >= 2)
+            {
+                
+                GameManager.Instance.GameStarted = true;
+                _tutorial.text =
+                    "you can use WASD to call the wind with the cost of 2 gold to shift house and merge them to level them up!\nYour resources, unit capacity, time are shown in the bottom right corner!";
+            }
         }
 
         if (tilePrefab.tileType == TileType.Thunder)

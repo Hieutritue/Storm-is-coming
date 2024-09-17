@@ -32,6 +32,7 @@ public class GameTileManager : MonoBehaviour
     public WindDirection windDirection;
     public float TravelTime = .5f;
     [HideInInspector] public bool Moving;
+    [SerializeField] private GameObject _text;
 
     #region ldminh
 
@@ -72,10 +73,35 @@ public class GameTileManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)) ShiftByWind(new Vector2Int(-1, 0));
-        if (Input.GetKeyDown(KeyCode.D)) ShiftByWind(new Vector2Int(1, 0));
-        if (Input.GetKeyDown(KeyCode.W)) ShiftByWind(new Vector2Int(0, -1));
-        if (Input.GetKeyDown(KeyCode.S)) ShiftByWind(new Vector2Int(0, 1));
+        if (!GameManager.Instance.GameStarted) return;
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            ShiftByWind(new Vector2Int(-1, 0));
+            _text.SetActive(false);
+            Time.timeScale = 1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            _text.SetActive(false);
+            ShiftByWind(new Vector2Int(1, 0));
+            Time.timeScale = 1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            _text.SetActive(false);
+            ShiftByWind(new Vector2Int(0, -1));
+            Time.timeScale = 1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            _text.SetActive(false);
+            ShiftByWind(new Vector2Int(0, 1));
+            Time.timeScale = 1;
+        }
     }
 
     public void CallThunder()
@@ -96,6 +122,7 @@ public class GameTileManager : MonoBehaviour
             GameManager.Instance.AudioManager.PlayClip(ClipName.NotEnough);
             return;
         }
+
         GameManager.Instance.ResourceManager.Gold -= 2;
 
         GameManager.Instance.AudioManager.PlayClip(ClipName.Wind);

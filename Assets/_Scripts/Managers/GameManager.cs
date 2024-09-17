@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
         //Cursor.SetCursor(_cursorTexture,Vector2.zero, CursorMode.Auto);
     }
 
-    private void Start()
-    {
-        ResourceManager.Wood = 5;
-    }
+    // private void Start()
+    // {
+    //     ResourceManager.Wood = 5;
+    // }
 
     public void Lose()
     {

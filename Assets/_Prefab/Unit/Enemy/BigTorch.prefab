@@ -192,11 +192,11 @@ MonoBehaviour:
   IsAlly: 0
   RealPosition: {fileID: 6652533270945377364}
   AllyType: 0
-  _health: 10000
+  _health: 20000
   _speed: 0.4
-  _damage: 175
+  _damage: 350
   _range: 1.8
-  _attackCooldown: 0.3
+  _attackCooldown: 0.5
   _doesAoe: 0
   _explosion: {fileID: 0}
   _animController: {fileID: 2433149563754859765}
