@@ -670,7 +670,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Press any button to go to main menu -'
+  m_text: '- Press SPACE to go to main menu -'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6a275d089868c7488c25af2f75f5e96, type: 2}
   m_sharedMaterial: {fileID: -3251113655729772746, guid: b6a275d089868c7488c25af2f75f5e96, type: 2}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -8,6 +9,11 @@ using DG.Tweening;
 public class MainMenu : MonoBehaviour
 {
     public Image image;
+
+    private void Start()
+    {
+        image.DOFade(0, 1);
+    }
 
     public void PlayGame()
     {

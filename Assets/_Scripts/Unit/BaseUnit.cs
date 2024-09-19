@@ -75,6 +75,10 @@ public class BaseUnit : MonoBehaviour
     {
         if (_isCastle) return;
 
+        // if (transform.position.x < -14.5f || transform.position.x > 7.5f || transform.position.y > 5 ||
+        //     transform.position.y < -6)
+        //     Die();
+        
         if (_rb.velocity.magnitude > 0.01f) // Check if the velocity is significant
         {
             _rb.velocity = Vector2.SmoothDamp(_rb.velocity, Vector2.zero, ref _vector2, 1);
